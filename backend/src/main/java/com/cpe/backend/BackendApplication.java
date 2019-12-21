@@ -1,58 +1,8 @@
 package com.cpe.backend;
 
-//Appointment   com.cpe.backend.b5903832_appointment.
-import com.cpe.backend.b5903832_appointment.entity.Duration;
-import com.cpe.backend.b5903832_appointment.repository.DurationRepository;
-
-//Register      com.cpe.backend.b5903900_register.
-import com.cpe.backend.b5903900_register.entity.TitleName;
-import com.cpe.backend.b5903900_register.entity.Patient;
-import com.cpe.backend.b5903900_register.entity.Gender;
-import com.cpe.backend.b5903900_register.entity.BloodGroup;
-import com.cpe.backend.b5903900_register.entity.Province;
-import com.cpe.backend.b5903900_register.repository.TitleNameRepository;
-import com.cpe.backend.b5903900_register.repository.PatientRepository;;
-import com.cpe.backend.b5903900_register.repository.GenderRepository;
-import com.cpe.backend.b5903900_register.repository.BloodGroupRepository;
-import com.cpe.backend.b5903900_register.repository.ProvinceRepository;
-
-
-
-//Schedule  com.cpe.backend.b5917518_schedule.
-import com.cpe.backend.b5917518_schedule.entity.Day;
-import com.cpe.backend.b5917518_schedule.entity.Room;
-import com.cpe.backend.b5917518_schedule.entity.PeriodTime;
-import com.cpe.backend.b5917518_schedule.repository.DayRepository;
-import com.cpe.backend.b5917518_schedule.repository.RoomRepository;
-import com.cpe.backend.b5917518_schedule.repository.PeriodTimeRepository;
-
-//DoctorProfile
-import com.cpe.backend.b5915477_doctor_profile.entity.Title;
-import com.cpe.backend.b5915477_doctor_profile.entity.Expertise;
-import com.cpe.backend.b5915477_doctor_profile.entity.Sex;
-import com.cpe.backend.b5915477_doctor_profile.repository.TitleR;
-import com.cpe.backend.b5915477_doctor_profile.repository.ExpertiseR;
-import com.cpe.backend.b5915477_doctor_profile.repository.SexR;
-
-
-//Examination
-import com.cpe.backend.b5905713_examination.entity.Disease;
-import com.cpe.backend.b5905713_examination.entity.Treatment_Type;
-import com.cpe.backend.b5905713_examination.entity.Severity_Level;
-import com.cpe.backend.b5905713_examination.repository.DiseaseRepository;
-import com.cpe.backend.b5905713_examination.repository.Treatment_TypeRepository;
-import com.cpe.backend.b5905713_examination.repository.Severity_LevelRepository;
-
-//PatientInformation
-import com.cpe.backend.b5903917_patient_information.entity.Patient_type;
-import com.cpe.backend.b5903917_patient_information.entity.Status;
-import com.cpe.backend.b5903917_patient_information.repository.Patient_typeR;
-import com.cpe.backend.b5903917_patient_information.repository.StatusR;
-
-///login
-import com.cpe.backend.login.entity.User;
-import com.cpe.backend.login.repository.UserRepository;
-
+//Drug  package com.cpe.backend.Entity
+import com.cpe.backend.Entity.DrugCategory;
+import com.cpe.backend.Entity.DrugType;
 
 
 
