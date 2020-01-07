@@ -1,4 +1,4 @@
-package com.cpe.backend.entity;
+package com.cpe.backend.Entity;
 
 import lombok.*;
 
