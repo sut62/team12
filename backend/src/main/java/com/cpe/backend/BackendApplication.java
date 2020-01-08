@@ -1,5 +1,13 @@
 package com.cpe.backend;
 
+//Pharmacist 
+import com.cpe.backend.Entity.TitlePharmacist;
+import com.cpe.backend.Entity.Province;
+import com.cpe.backend.Entity.Sex;
+import com.cpe.backend.repository.TitlePharmacistRepository;
+import com.cpe.backend.repository.ProvinceRepository;
+import com.cpe.backend.repository.SexRepository;
+
 //Drug  package com.cpe.backend.Entity
 import com.cpe.backend.Entity.DrugCategory;
 import com.cpe.backend.repository.DrugCategoryRepository;
@@ -36,15 +44,41 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(final DoctorRepository doctorRepository, 
+	ApplicationRunner init(final TitlePharmacistRepository titlepharmacistRepository,
+	final SexRepository sexRepository, final ProvinceRepository provinceRepository,final DoctorRepository doctorRepository, 
 			final TitleNameRepository titleNameRepository,
 			final Unit_of_medicineRepository unit_of_medicineRepository,
 			final PaymentChannelRepository paymentChannelRepository, 
 			final CashierRepository cashierRepository,
-			final MedicalRightRepository medicalRightRepository,
+			final MedicalRightRepository medicalRightRepository
 			final DrugCategoryRepository drugcategoryRepository
 			) {
 		return args -> {
+
+			Stream.of("ภก.","ภกญ.").forEach(titlePharm -> {
+				TitlePharmacist titlepharmacist = new TitlePharmacist();
+				titlepharmacist.setTitlepharmacist(titlePharm);
+				titlepharmacistRepository.save(titlepharmacist);
+			});
+
+			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี", "ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท"
+					, "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด", "ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช"
+					, "นครสวรรค์", "นนทบุรี", "นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี", "พระนครศรีอยุธยา"
+					, "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่", "พะเยา", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน"
+					, "ยะลา", "ยโสธร", "ร้อยเอ็ด", "ระนอง", "ระยอง", "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล"
+					, "สมุทรปราการ", "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี", "สุรินทร์", "หนองคาย"
+					, "หนองบัวลำภู", "อ่างทอง", "อุดรธานี", "อุทัยธานี", "อุตรดิตถ์", "อุบลราชธานี", "อำนาจเจริญ").forEach(provinces -> {
+				Province province = new Province();
+				province.setProvince(provinces);
+				provinceRepository.save(province);
+			});
+
+			Stream.of("ชาย","หญิง").forEach(titleSex -> {
+				Sex sex = new Sex();
+				sex.setSex(titleSex);
+				sexRepository.save(sex);
+			});
+
 			Stream.of("ยาสามัญประจำบ้าน", "ยาควบคุมพิเศษ", "ยาอันตราย").forEach(drugcategoryNameX -> {
 				final DrugCategory drugcategoryname = new DrugCategory();
 				drugcategoryname.setDrugcategoryname(drugcategoryNameX);
@@ -88,6 +122,9 @@ public class BackendApplication {
 				cashierRepository.save(cashier);
 			});
 			
+			titlepharmacistRepository.findAll().forEach(System.out::println);
+			provinceRepository.findAll().forEach(System.out::println);
+			sexRepository.findAll().forEach(System.out::println);
 			drugcategoryRepository.findAll().forEach(System.out::println);
 			doctorRepository.findAll().forEach(System.out::println);
 			titleNameRepository.findAll().forEach(System.out::println);
