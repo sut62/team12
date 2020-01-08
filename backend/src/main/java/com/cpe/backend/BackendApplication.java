@@ -2,7 +2,9 @@ package com.cpe.backend;
 
 //Drug  package com.cpe.backend.Entity
 import com.cpe.backend.Entity.DrugCategory;
-import com.cpe.backend.Entity.DrugType;
+import com.cpe.backend.repository.DrugCategoryRepository;
+
+
 //Prescription
 import com.cpe.backend.Entity.Doctor;
 import com.cpe.backend.Entity.TitleName;
@@ -34,11 +36,21 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(final DoctorRepository doctorRepository, final TitleNameRepository titleNameRepository,
+	ApplicationRunner init(final DoctorRepository doctorRepository, 
+			final TitleNameRepository titleNameRepository,
 			final Unit_of_medicineRepository unit_of_medicineRepository,
-			final PaymentChannelRepository paymentChannelRepository, final CashierRepository cashierRepository,
-			final MedicalRightRepository medicalRightRepository) {
+			final PaymentChannelRepository paymentChannelRepository, 
+			final CashierRepository cashierRepository,
+			final MedicalRightRepository medicalRightRepository,
+			final DrugCategoryRepository drugcategoryRepository
+			) {
 		return args -> {
+			Stream.of("ยาสามัญประจำบ้าน", "ยาควบคุมพิเศษ", "ยาอันตราย").forEach(drugcategoryNameX -> {
+				final DrugCategory drugcategoryname = new DrugCategory();
+				drugcategoryname.setDrugcategoryname(drugcategoryNameX);
+				drugcategoryRepository.save(drugcategoryname);
+			});
+
 			Stream.of("จตุพล สนิทไทย", "ทศพล ตะสันเทียะ", "ณรงค์ศักดิ์ สุวรรณ", "สโรชา สุขสบาย", "ประวีร์ ยุทธวีระวงศ์",
 					"เจนจิรา กล่อมตระกูล").forEach(doctorX -> {
 						final Doctor doctor_name = new Doctor();
@@ -75,7 +87,8 @@ public class BackendApplication {
 				cashier.setCashier(cashierX);
 				cashierRepository.save(cashier);
 			});
-
+			
+			drugcategoryRepository.findAll().forEach(System.out::println);
 			doctorRepository.findAll().forEach(System.out::println);
 			titleNameRepository.findAll().forEach(System.out::println);
 			unit_of_medicineRepository.findAll().forEach(System.out::println);

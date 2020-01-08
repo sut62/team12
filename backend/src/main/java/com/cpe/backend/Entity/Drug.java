@@ -1,4 +1,4 @@
-package com.cpe.backend.entity;
+package com.cpe.backend.Entity;
 import lombok.*;
 
 import javax.persistence.Id;
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-import java.sql.Date;
+//import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,9 +44,9 @@ public class Drug {
     @Column(name="PRICE")
     private @NonNull Number price;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugType.class)
-    @JoinColumn(name = "DrugType_ID", insertable = true)
-    private DrugType drugtype;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Unit_of_medicine.class)
+    @JoinColumn(name = "Unit_of_medicine_ID", insertable = true)
+    private Unit_of_medicine unit_of_medicine;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugCategory.class)
     @JoinColumn(name = "DrugCategory_ID", insertable = true)
