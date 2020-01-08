@@ -25,10 +25,12 @@ import java.net.URLDecoder;
 import com.cpe.backend.Entity.Drug;
 import com.cpe.backend.Entity.Unit_of_medicine;
 import com.cpe.backend.Entity.DrugCategory;
+import com.cpe.backend.Entity.Pharmacist;
 import com.cpe.backend.repository.Unit_of_medicineRepository;
 import com.cpe.backend.repository.DrugRepository;
 import com.cpe.backend.repository.DrugTypeRepository;
 import com.cpe.backend.repository.DrugCategoryRepository;
+import com.cpe.backend.repository.PharmacistRepository;
 
 
 //เอามาจากของเพื่อน
@@ -47,6 +49,8 @@ public class DrugController {
     private Unit_of_medicineRepository unit_of_medicineRepository;
     @Autowired
     private DrugCategoryRepository drugcategoryRepository;
+    @Autowired
+    private PharmacistRepository pharmacistRepository;
    
 
     DrugController(DrugRepository drugRepository) {
@@ -72,6 +76,7 @@ public class DrugController {
 
     DrugCategory drugcategory = drugcategoryRepository.findById(drugcategory_id);
     Unit_of_medicine unit = unit_of_medicineRepository.findById(Unit_of_medicine_id);
+    Pharmacist pharmacist = pharmacistRepository.findById(pharmacist_id);
 
     //เหลือของท็อป
     //DoctorProfile createdBy = doctorProfileR.findById(doctorprofile_id);
@@ -81,7 +86,7 @@ public class DrugController {
     newDrug.setHow(how);
     newDrug.setSideeffect(sideeffect);
     newDrug.setPrice(price);  
-    //newDrug.setDetail(detail); 
+    newDrug.setPharmacist(pharmacist); 
 
     return drugRepository.save(newDrug); //บันทึก Objcet ชื่อ VideoRental
     
