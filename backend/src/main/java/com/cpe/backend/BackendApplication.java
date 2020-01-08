@@ -65,9 +65,9 @@ public class BackendApplication {
 			});
 
 			Stream.of("ช่องชำระที่ 1", "ช่องชำระที่ 2", "ช่องชำระที่ 3").forEach(channelX -> {
-				final PaymentChannel paymentChannel = new PaymentChannel();
-				paymentChannel.setPaymentChannel(channelX);
-				paymentChannelRepository.save(paymentChannel);
+				final PaymentChannel Channel = new PaymentChannel();
+				Channel.setChannel(channelX);
+				paymentChannelRepository.save(Channel);
 			});
 
 			Stream.of("โดนัล ทรัมป์", "ประยุทธ์", "บูติน").forEach(cashierX -> {
