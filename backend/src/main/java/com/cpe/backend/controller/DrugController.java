@@ -88,7 +88,7 @@ public class DrugController {
     newDrug.setPrice(price);  
     newDrug.setPharmacist(pharmacist); 
 
-    return drugRepository.save(newDrug); //บันทึก Objcet ชื่อ VideoRental
+    return drugRepository.save(newDrug); 
     
     }
 }

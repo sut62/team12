@@ -1,5 +1,5 @@
 
-package com.cpe.backend.entity;
+package com.cpe.backend.Entity;
 
 import lombok.*; //ช่วยให้เขียนโค๊ดได้ง่ายขึ้น
 
