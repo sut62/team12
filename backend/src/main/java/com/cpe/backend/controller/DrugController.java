@@ -22,9 +22,10 @@ import java.util.stream.Collectors;
 import java.net.URLDecoder;
 
 
-import com.cpe.backend.entity.Drug;
-import com.cpe.backend.entity.DrugType;
-import com.cpe.backend.entity.DrugCategory;
+import com.cpe.backend.Entity.Drug;
+import com.cpe.backend.Entity.Unit_of_medicine;
+import com.cpe.backend.Entity.DrugCategory;
+import com.cpe.backend.repository.Unit_of_medicineRepository;
 import com.cpe.backend.repository.DrugRepository;
 import com.cpe.backend.repository.DrugTypeRepository;
 import com.cpe.backend.repository.DrugCategoryRepository;
@@ -43,7 +44,7 @@ public class DrugController {
     @Autowired
     private final DrugRepository drugRepository;
     @Autowired
-    private DrugTypeRepository drugtypeRepository;
+    private Unit_of_medicineRepository unit_of_medicineRepository;
     @Autowired
     private DrugCategoryRepository drugcategoryRepository;
    
@@ -59,10 +60,10 @@ public class DrugController {
 
     
 
-    @PostMapping("/drug/{drugcategory_id}/{drugtype_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
+    @PostMapping("/drug/{drugcategory_id}/{Unit_of_medicine_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
     public Drug newDrug(Drug newDrug,
     @PathVariable long drugcategory_id,
-    @PathVariable long drugtype_id,
+    @PathVariable long Unit_of_medicine_id,
     @PathVariable String how,
     @PathVariable String sideeffect,
     @PathVariable long price,
@@ -70,19 +71,19 @@ public class DrugController {
 
 
     DrugCategory drugcategory = drugcategoryRepository.findById(drugcategory_id);
-    DrugType drugtype = drugtypeRepository.findById(drugtype_id);
+    Unit_of_medicine unit = unit_of_medicineRepository.findById(Unit_of_medicine_id);
 
-    //--
-    DoctorProfile createdBy = doctorProfileR.findById(doctorprofile_id);
+    //เหลือของท็อป
+    //DoctorProfile createdBy = doctorProfileR.findById(doctorprofile_id);
 
-    newAppointments.setAppmPatient(appmPatient);
-    newAppointments.setCreatedBy(createdBy);
-    newAppointments.setDuration(duration);
-    newAppointments.setAppmDate(appmDate);
-    newAppointments.setRoom(room);  
-    newAppointments.setDetail(detail); 
+    newDrug.setDrugcategory(drugcategory);
+    newDrug.setUnit_of_medicine(unit);
+    newDrug.setHow(how);
+    newDrug.setSideeffect(sideeffect);
+    newDrug.setPrice(price);  
+    //newDrug.setDetail(detail); 
 
-    return appointmentsRepository.save(newAppointments); //บันทึก Objcet ชื่อ VideoRental
+    return drugRepository.save(newDrug); //บันทึก Objcet ชื่อ VideoRental
     
     }
 }
