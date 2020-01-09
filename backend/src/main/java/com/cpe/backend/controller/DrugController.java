@@ -26,6 +26,7 @@ import com.cpe.backend.Entity.Drug;
 import com.cpe.backend.Entity.Unit_of_medicine;
 import com.cpe.backend.Entity.DrugCategory;
 import com.cpe.backend.Entity.Pharmacist;
+
 import com.cpe.backend.repository.Unit_of_medicineRepository;
 import com.cpe.backend.repository.DrugRepository;
 import com.cpe.backend.repository.DrugCategoryRepository;
@@ -58,9 +59,10 @@ public class DrugController {
 
     
 
-    @PostMapping("/drug/{drugcategory_id}/{Unit_of_medicine_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
+    @PostMapping("/drug/{drugname}/{DrugCategory_id}/{Unit_of_medicine_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
     public Drug newDrug(Drug newDrug,
-    @PathVariable long drugcategory_id,
+    @PathVariable String drugname,
+    @PathVariable long DrugCategory_id,
     @PathVariable long Unit_of_medicine_id,
     @PathVariable String how,
     @PathVariable String sideeffect,
@@ -68,11 +70,12 @@ public class DrugController {
     @PathVariable long pharmacist_id) {
 
 
-    DrugCategory drugcategory = drugcategoryRepository.findById(drugcategory_id);
+    DrugCategory category = drugcategoryRepository.findById(DrugCategory_id);
     Unit_of_medicine unit = unit_of_medicineRepository.findById(Unit_of_medicine_id);
     Pharmacist pharmacist = pharmacistRepository.findById(pharmacist_id);
 
-    newDrug.setDrugcategory(drugcategory);
+    newDrug.setDrugname(drugname);
+    newDrug.setCategory(category);
     newDrug.setUnit_of_medicine(unit);
     newDrug.setHow(how);
     newDrug.setSideeffect(sideeffect);

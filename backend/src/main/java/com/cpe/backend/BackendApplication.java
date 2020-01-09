@@ -12,7 +12,7 @@ import com.cpe.backend.repository.SexRepository;
 import com.cpe.backend.Entity.DrugDispenseChannel;
 import com.cpe.backend.repository.DrugDispenseChannelRepository;
 
-//Drug  package com.cpe.backend.Entity
+//Drug  
 import com.cpe.backend.Entity.DrugCategory;
 import com.cpe.backend.repository.DrugCategoryRepository;
 
@@ -102,10 +102,10 @@ public class BackendApplication {
 				sexRepository.save(sex);
 			});
 
-			Stream.of("ยาสามัญประจำบ้าน", "ยาควบคุมพิเศษ", "ยาอันตราย").forEach(drugcategoryNameX -> {
-				final DrugCategory drugcategoryname = new DrugCategory();
-				drugcategoryname.setDrugcategoryname(drugcategoryNameX);
-				drugcategoryRepository.save(drugcategoryname);
+			Stream.of("ยาสามัญประจำบ้าน", "ยาควบคุมพิเศษ", "ยาอันตราย").forEach(category -> {
+				DrugCategory drugCategory = new DrugCategory();
+				drugCategory.setCategory(category);
+				drugcategoryRepository.save(drugCategory);
 			});
 
 			Stream.of("จตุพล สนิทไทย", "ทศพล ตะสันเทียะ", "ณรงค์ศักดิ์ สุวรรณ", "สโรชา สุขสบาย", "ประวีร์ ยุทธวีระวงศ์",
