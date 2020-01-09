@@ -52,9 +52,8 @@ public class RecordBillController {
         return recordBillRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/recordBill/{MedicalRight_ID}/{PaymentChannel_id}/{Cashier_id}")
+    @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{TotalPrice}")
     public RecordBill newRecordBill(RecordBill newRecordBill, 
-            @PathVariable Date Day,
             @PathVariable Integer TotalPrice,
             @PathVariable long MedicalRight_id, 
             @PathVariable long PaymentChannel_id,
@@ -68,7 +67,7 @@ public class RecordBillController {
         newRecordBill.setPaymentChannel(paymentChannel);
         newRecordBill.setMedicalRight(medicalRight);
         newRecordBill.setTotalPrice(TotalPrice);
-        newRecordBill.setDay(Day);
+        newRecordBill.setCreateDate(new Date());
 
         return recordBillRepository.save(newRecordBill); // บันทึก Objcet ชื่อ RecordBill
 
