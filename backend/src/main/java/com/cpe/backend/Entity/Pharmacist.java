@@ -37,13 +37,10 @@ public class Pharmacist {
     //กำหนดตัวแปร
     private @NonNull Long id;
     private @NonNull Long id_card;
-    private @NonNull String firstname;
-    private @NonNull String lastname;
+    private @NonNull String name;
     private @NonNull Date birthday;
     private @NonNull Integer age;
     private @NonNull String address;
-    private @NonNull String graduated;
-    private @NonNull String exp;
     private @NonNull Integer phone;
     private @NonNull String mail;
 

@@ -58,19 +58,16 @@ public class PharmacistController {
     }
 
 
-    @PostMapping("/pharmacist/{province_id}/{sex_id}/{titlepharmacist_id}/{id_card}/{firstname}/{lastname}/{birthday}/{age}/{address}/{graduated}/{exp}/{phone}/{mail}")
+    @PostMapping("/pharmacist/{province_id}/{sex_id}/{titlepharmacist_id}/{id_card}/{name}/{birthday}/{age}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
     @PathVariable long id_card,
     @PathVariable long province_id,
     @PathVariable long sex_id,
     @PathVariable long titlepharmacist_id,
-    @PathVariable String firstname,
-    @PathVariable String lastname,
+    @PathVariable String name,
     @PathVariable Date birthday,
     @PathVariable Integer age,
     @PathVariable String address,
-    @PathVariable String graduated,
-    @PathVariable String exp,
     @PathVariable Integer phone,
     @PathVariable String mail ) {
 
@@ -82,13 +79,10 @@ public class PharmacistController {
     newPharmacist.setSex(sex);
     newPharmacist.setTitlePharmacist(titlepharmacist);
     newPharmacist.setId_card(id_card);
-    newPharmacist.setFirstname(firstname);
-    newPharmacist.setLastname(lastname);
+    newPharmacist.setName(name);
     newPharmacist.setBirthday(birthday);
     newPharmacist.setAge(age);  
     newPharmacist.setAddress(address); 
-    newPharmacist.setGraduated(graduated);  
-    newPharmacist.setExp(exp);  
     newPharmacist.setPhone(phone);  
     newPharmacist.setMail(mail);  
 
