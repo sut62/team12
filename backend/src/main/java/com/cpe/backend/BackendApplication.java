@@ -8,6 +8,10 @@ import com.cpe.backend.repository.TitlePharmacistRepository;
 import com.cpe.backend.repository.ProvinceRepository;
 import com.cpe.backend.repository.SexRepository;
 
+//DrugDispense
+import com.cpe.backend.Entity.DrugDispenseChannel;
+import com.cpe.backend.repository.DrugDispenseChannelRepository;
+
 //Drug  package com.cpe.backend.Entity
 import com.cpe.backend.Entity.DrugCategory;
 import com.cpe.backend.repository.DrugCategoryRepository;
@@ -50,10 +54,18 @@ public class BackendApplication {
 			final Unit_of_medicineRepository unit_of_medicineRepository,
 			final PaymentChannelRepository paymentChannelRepository, 
 			final CashierRepository cashierRepository,
-			final MedicalRightRepository medicalRightRepository
-			final DrugCategoryRepository drugcategoryRepository
+			final MedicalRightRepository medicalRightRepository,
+			final DrugCategoryRepository drugcategoryRepository,
+			final DrugDispenseChannelRepository drugDispenseChannelRepository
 			) {
 		return args -> {
+
+			Stream.of("ช่อง 1","ช่อง 2","ช่อง 3").forEach(drugdispensechannelX -> {
+				final DrugDispenseChannel drugdispensechannel = new DrugDispenseChannel();
+				drugdispensechannel.setDrugdispensechannel(drugdispensechannelX);
+				drugDispenseChannelRepository.save(drugdispensechannel);
+			});
+
 
 			Stream.of("ภก.","ภกญ.").forEach(titlePharm -> {
 				TitlePharmacist titlepharmacist = new TitlePharmacist();
@@ -132,6 +144,7 @@ public class BackendApplication {
 			medicalRightRepository.findAll().forEach(System.out::println);
 			paymentChannelRepository.findAll().forEach(System.out::println);
 			cashierRepository.findAll().forEach(System.out::println);
+			drugDispenseChannelRepository.findAll().forEach(System.out::println);
 		};
 	}
 
