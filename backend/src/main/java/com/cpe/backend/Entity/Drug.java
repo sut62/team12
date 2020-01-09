@@ -50,7 +50,11 @@ public class Drug {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugCategory.class)
     @JoinColumn(name = "DrugCategory_ID", insertable = true)
-    private DrugCategory drugcategorType;
+    private DrugCategory category;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Pharmacist.class)
+    @JoinColumn(name = "Pharmacist_ID", insertable = true)
+    private Pharmacist pharmacist;
 
   
 }
