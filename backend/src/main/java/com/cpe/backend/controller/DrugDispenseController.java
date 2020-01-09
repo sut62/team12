@@ -45,7 +45,7 @@ public class DrugDispenseController {
         return drugDispenseRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/recordBill/{DrugDispenseChannel_id}")
+    @PostMapping("/drugdispense/{DrugDispenseChannel_id}")
     public DrugDispense newDrugDispense(DrugDispense newDrugDispense, 
             @PathVariable long DrugDispenseChannel_id) {
 
