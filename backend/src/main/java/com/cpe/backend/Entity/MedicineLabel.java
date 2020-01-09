@@ -20,8 +20,6 @@ import javax.persistence.FetchType;
 
 @Data
 @Entity //เป็นการประกาศว่า java class นี้เป็น entity class เพื่อให้ framework มาอ่านข้อมูลของ class นี้ไปสร้างเป็น table
-@Getter // การส่งข้อมูล
-@Setter   //การรับข่อมูล
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -50,9 +48,11 @@ public class MedicineLabel{
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicineQuantity.class) //เป็นความสัมพันธ์แบบ many to one ระหว่งคลาสนี้กับคลาส Room -Entity
   @JoinColumn(name = "MEDICINEQUANTITY_ID", insertable = true) //เป็นการ  join ตารางโดยมีตารางชื่อว่า Room_ID
   private MedicineQuantity medicineQuantity ; // private ชื่อ calss กับชื่อเส้น ที่จะส่งไป
-
+/*
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Prescription.class)
   @JoinColumn(name = "Prescription_ID", insertable = true)
   private Prescription prescription ;
+*/
+
 
 }

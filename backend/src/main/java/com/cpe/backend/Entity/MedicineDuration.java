@@ -1,4 +1,4 @@
-package com.cpe.backend.entity;
+package com.cpe.backend.Entity;
 
 import lombok.*;
 import javax.persistence.Id;
@@ -26,6 +26,6 @@ public class MedicineDuration{
   @Column(name = "MEDICINEDURATION_ID", unique = true, nullable = true)
 
   private @NonNull Long id;
-  private @NonNull String duration;
+  private @NonNull String medicineDuration;
   
 }
