@@ -31,8 +31,8 @@ import com.cpe.backend.repository.MedicineLabelRepository;
 import com.cpe.backend.repository.MedicineQuantityRepository;
 
 //ใช้ร่วมกับเพื่อน
-import com.cpe.backend.Entity.Prescription;
-import com.cpe.backend.repository.PrescriptionRepository;
+//import com.cpe.backend.Entity.Prescription;
+//import com.cpe.backend.repository.PrescriptionRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -41,8 +41,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class MedicineLabelController {
     @Autowired
     private final MedicineLabelRepository medicineLabelRepository;
-    @Autowired
-    private PrescriptionRepository prescriptionRepository;
+   // @Autowired
+  // private PrescriptionRepository prescriptionRepository;
     @Autowired
     private MedicineDurationRepository medicineDurationRepository;
     @Autowired
@@ -60,26 +60,26 @@ public class MedicineLabelController {
         return medicineLabelRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/MedicineLabel/{prescription_id}/{quantity_id}/Frequency_id}/{duration_id}")
+    @PostMapping("/MedicineLabel/{quantity_id}/frequency_id}/{duration_id}")
     public MedicineLabel newSchedule(MedicineLabel newMedicineLabel,
-    @PathVariable long prescription_id,
+   // @PathVariable long prescription_id,
     @PathVariable long quantity_id,
-    @PathVariable long Frequency_id,
+    @PathVariable long frequency_id,
     @PathVariable long duration_id){
     
 
-    Prescription prescription = prescriptionRepository.findById(prescription_id);
-    MedicineQuantity periodTime = medicineQuantityRepository.findById(quantity_id);
-    MedicineFrequency  Frequency = medicineFrequencyRepository.findById(Frequency_id);
-    MedicineDuration duration = medicineDurationRepository.findById(duration_id); 
+    //Prescription prescription = prescriptionRepository.findById(prescription_id);
+    MedicineQuantity medicineQuantity = medicineQuantityRepository.findById(quantity_id);
+    MedicineFrequency  medicineFrequency = medicineFrequencyRepository.findById(frequency_id);
+    MedicineDuration medicineDuration = medicineDurationRepository.findById(duration_id); 
     
     
     
-    newMedicineLabel.getPrescription();
-    newMedicineLabel.setPrescription(prescription);
-    newMedicineLabel.setQuantity(quantity);
-    newMedicineLabel.setFrequency(Frequency);
-    newMedicineLabel.setDuration(duration);
+    //newMedicineLabel.getPrescription();
+    //newMedicineLabel.setPrescription(prescription);
+    newMedicineLabel.setMedicineQuantity(medicineQuantity);
+    newMedicineLabel.setMedicineFrequency(medicineFrequency);
+    newMedicineLabel.setMedicineDuration(medicineDuration);
     
     
 
