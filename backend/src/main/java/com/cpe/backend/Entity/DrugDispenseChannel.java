@@ -21,7 +21,7 @@ public class DrugDispenseChannel {
     @Id
     @SequenceGenerator(name="drugdispensechannel_seq",sequenceName="drugdispensechannel_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="drugdispensechannel_seq")
-    @Column(name="DRUGDISPENSECHANNEL_ID",unique = true, nullable = true)
+    @Column(name="DrugDispenseChannel_id",unique = true, nullable = true)
     private @NonNull Long id;
-    private @NonNull Integer Channel;
+    private @NonNull String drugdispensechannel;
 }
