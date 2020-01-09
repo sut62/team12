@@ -33,7 +33,7 @@ public class RecordBill {
 
     private @NonNull Long ID;
     private @NonNull Integer TotalPrice ;
-    private @NonNull Date Day;
+    private @NonNull Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PaymentChannel.class)
     @JoinColumn(name = "PaymentChannel_ID", insertable = true)
