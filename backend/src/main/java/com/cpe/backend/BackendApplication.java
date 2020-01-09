@@ -33,6 +33,14 @@ import com.cpe.backend.repository.CashierRepository;
 import com.cpe.backend.repository.MedicalRightRepository;
 import com.cpe.backend.repository.PaymentChannelRepository;
 
+//MedicineLabel
+import com.cpe.backend.Entity.MedicineQuantity;
+import com.cpe.backend.Entity.MedicineFrequency;
+import com.cpe.backend.Entity.MedicineDuration;
+import com.cpe.backend.repository.MedicineQuantityRepository;
+import com.cpe.backend.repository.MedicineFrequencyRepository;
+import com.cpe.backend.repository.MedicineDurationRepository;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
@@ -56,7 +64,10 @@ public class BackendApplication {
 			final CashierRepository cashierRepository,
 			final MedicalRightRepository medicalRightRepository,
 			final DrugCategoryRepository drugcategoryRepository,
-			final DrugDispenseChannelRepository drugDispenseChannelRepository
+			final DrugDispenseChannelRepository drugDispenseChannelRepository,
+			final MedicineQuantityRepository medicineQuantityRepository, 
+			final MedicineFrequencyRepository medicineFrequencyRepository,
+			final MedicineDurationRepository medicineDurationRepository
 			) {
 		return args -> {
 
@@ -134,6 +145,29 @@ public class BackendApplication {
 				cashierRepository.save(cashier);
 			});
 			
+		//toonjung
+			Stream.of("ช้อนชา", "ช้อนโต๊ะ", "เม็ด","แคปซูล").forEach(medicineQuantitys -> {
+				MedicineQuantity medicineQuantity = new MedicineQuantity();
+				medicineQuantity.setMedicineQuantity(medicineQuantitys);
+				medicineQuantityRepository.save(medicineQuantity);
+			});
+		
+			Stream.of("1 ครั้ง", "2 ครั้ง", "3 ครั้ง","4 ครั้ง").forEach(medicineFrequencys -> {
+				 MedicineFrequency medicineFrequency = new MedicineFrequency();
+				medicineFrequency.setMedicineFrequency(medicineFrequencys);
+				medicineFrequencyRepository.save(medicineFrequency);
+			});
+
+			Stream.of("เช้า", "กลางวัน", "เย็น","ก่อนนอน").forEach(medicineDurations -> {
+				 MedicineDuration medicineDuration = new MedicineDuration();
+				medicineDuration.setMedicineDuration(medicineDurations);
+				medicineDurationRepository.save(medicineDuration);
+			});
+
+			
+			medicineQuantityRepository.findAll().forEach(System.out::println);
+			medicineFrequencyRepository.findAll().forEach(System.out::println);
+			medicineDurationRepository.findAll().forEach(System.out::println);
 			titlepharmacistRepository.findAll().forEach(System.out::println);
 			provinceRepository.findAll().forEach(System.out::println);
 			sexRepository.findAll().forEach(System.out::println);
