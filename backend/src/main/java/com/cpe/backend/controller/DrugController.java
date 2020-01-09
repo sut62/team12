@@ -28,14 +28,8 @@ import com.cpe.backend.Entity.DrugCategory;
 import com.cpe.backend.Entity.Pharmacist;
 import com.cpe.backend.repository.Unit_of_medicineRepository;
 import com.cpe.backend.repository.DrugRepository;
-import com.cpe.backend.repository.DrugTypeRepository;
 import com.cpe.backend.repository.DrugCategoryRepository;
 import com.cpe.backend.repository.PharmacistRepository;
-
-
-//เอามาจากของเพื่อน
-//import com.cpe.backend.b5903900_register.entity.Patient;
-//import com.cpe.backend.b5903900_register.repository.PatientRepository;  
 
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -77,9 +71,6 @@ public class DrugController {
     DrugCategory drugcategory = drugcategoryRepository.findById(drugcategory_id);
     Unit_of_medicine unit = unit_of_medicineRepository.findById(Unit_of_medicine_id);
     Pharmacist pharmacist = pharmacistRepository.findById(pharmacist_id);
-
-    //เหลือของท็อป
-    //DoctorProfile createdBy = doctorProfileR.findById(doctorprofile_id);
 
     newDrug.setDrugcategory(drugcategory);
     newDrug.setUnit_of_medicine(unit);
