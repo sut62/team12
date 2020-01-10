@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Appointments from '../components/Appointments';
 import Register from '../components/Register';
 import DoctorProfile from '../components/DoctorProfile';
-import Schedule from '../components/Schedule';
+import MedicineLabel from '../components/MedicineLabel';
 import PatientInformation from '../components/PatientInformation';
 import Examination from '../components/Examination';
 import Login from '../components/Login';
@@ -37,8 +37,8 @@ export default new Router({
             component: Appointments
         },
         {
-            path: '/schedule',
-            component: Schedule
+            path: '/medicineLabel',
+            component: MedicineLabel
         },
         {
             path: '/patient_information',
