@@ -36,6 +36,7 @@ public class Prescription {
     private @NonNull String name;
     private @NonNull Integer age;
     private @NonNull String drugallergy;
+    private @NonNull Integer amount;
     private @NonNull Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitleName.class)
