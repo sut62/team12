@@ -46,4 +46,8 @@ public class RecordBill {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicalRight.class)
     @JoinColumn(name = "MedicalRight_ID", insertable = true)
     private MedicalRight medicalRight;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Prescription.class)
+    @JoinColumn(name = "Prescription_ID",insertable = true)
+    private Prescription prescription;
 }
