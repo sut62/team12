@@ -31,8 +31,10 @@ import com.cpe.backend.repository.MedicineLabelRepository;
 import com.cpe.backend.repository.MedicineQuantityRepository;
 
 //ใช้ร่วมกับเพื่อน
-//import com.cpe.backend.Entity.Prescription;
-//import com.cpe.backend.repository.PrescriptionRepository;
+import com.cpe.backend.Entity.Prescription;
+import com.cpe.backend.Entity.Drug;
+import com.cpe.backend.repository.PrescriptionRepository;
+import com.cpe.backend.repository.DrugRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -40,16 +42,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 public class MedicineLabelController {
     @Autowired
+    private PrescriptionRepository prescriptionRepository;
+    @Autowired
+    private DrugRepository drugRepository;
+    @Autowired
     private final MedicineLabelRepository medicineLabelRepository;
-   // @Autowired
-  // private PrescriptionRepository prescriptionRepository;
     @Autowired
     private MedicineDurationRepository medicineDurationRepository;
     @Autowired
     private MedicineFrequencyRepository medicineFrequencyRepository;
     @Autowired
     private MedicineQuantityRepository medicineQuantityRepository;
-
+    
+   
 
     MedicineLabelController(MedicineLabelRepository medicineLabelRepository) { //name controller:name reoository
         this.medicineLabelRepository = medicineLabelRepository;
@@ -60,23 +65,30 @@ public class MedicineLabelController {
         return medicineLabelRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/MedicineLabel/{quantity_id}/frequency_id}/{duration_id}")
+    @PostMapping("/MedicineLabel/{Prescription_id}/{Drug_id}/{quantity}/{medicineQuantity_id}/{medicineFrequency_id}/{medicineDuration_id}")
     public MedicineLabel newSchedule(MedicineLabel newMedicineLabel,
-   // @PathVariable long prescription_id,
-    @PathVariable long quantity_id,
-    @PathVariable long frequency_id,
-    @PathVariable long duration_id){
+    
+     @PathVariable long Prescription_id,
+     @PathVariable long Drug_id,
+    @PathVariable String quantity,
+     @PathVariable long medicineQuantity_id,
+    @PathVariable long medicineFrequency_id,
+    @PathVariable long medicineDuration_id)
+
+    {
     
 
-    //Prescription prescription = prescriptionRepository.findById(prescription_id);
-    MedicineQuantity medicineQuantity = medicineQuantityRepository.findById(quantity_id);
-    MedicineFrequency  medicineFrequency = medicineFrequencyRepository.findById(frequency_id);
-    MedicineDuration medicineDuration = medicineDurationRepository.findById(duration_id); 
+    Prescription prescription = prescriptionRepository.findById(Prescription_id);
+    Drug drug = drugRepository.findById(Drug_id);
+    MedicineQuantity medicineQuantity = medicineQuantityRepository.findById(medicineQuantity_id);
+    MedicineFrequency  medicineFrequency = medicineFrequencyRepository.findById(medicineFrequency_id);
+    MedicineDuration medicineDuration = medicineDurationRepository.findById(medicineDuration_id); 
     
     
     
-    //newMedicineLabel.getPrescription();
-    //newMedicineLabel.setPrescription(prescription);
+    newMedicineLabel.setPrescription(prescription);
+    newMedicineLabel.setDrug(drug);
+    newMedicineLabel.setQuantity(quantity);
     newMedicineLabel.setMedicineQuantity(medicineQuantity);
     newMedicineLabel.setMedicineFrequency(medicineFrequency);
     newMedicineLabel.setMedicineDuration(medicineDuration);

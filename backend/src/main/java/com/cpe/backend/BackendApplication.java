@@ -158,7 +158,7 @@ public class BackendApplication {
 				medicineFrequencyRepository.save(medicineFrequency);
 			});
 
-			Stream.of("เช้า", "กลางวัน", "เย็น","ก่อนนอน").forEach(medicineDurations -> {
+			Stream.of("เช้า กลางวัน เย็น", "เช้า เย็น", "เช้า กลาวัน ก่อนนอน","ก่อนนอน").forEach(medicineDurations -> {
 				 MedicineDuration medicineDuration = new MedicineDuration();
 				medicineDuration.setMedicineDuration(medicineDurations);
 				medicineDurationRepository.save(medicineDuration);

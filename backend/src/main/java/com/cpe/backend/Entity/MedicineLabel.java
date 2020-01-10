@@ -34,7 +34,7 @@ public class MedicineLabel{
   @Column(name = "MEDICINELABEL_ID", unique = true, nullable = true)  //กำหนดให้ column นี้มีชื่อว่า MedicineLabel_ID ถ้าไม่กำหนดมันจะเป็น ID ให้เองโดยอัตโนมัติ
 
   private @NonNull Long id;
-  
+  private @NonNull String quantity;
 
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicineDuration.class)
@@ -48,11 +48,13 @@ public class MedicineLabel{
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicineQuantity.class) //เป็นความสัมพันธ์แบบ many to one ระหว่งคลาสนี้กับคลาส Room -Entity
   @JoinColumn(name = "MEDICINEQUANTITY_ID", insertable = true) //เป็นการ  join ตารางโดยมีตารางชื่อว่า Room_ID
   private MedicineQuantity medicineQuantity ; // private ชื่อ calss กับชื่อเส้น ที่จะส่งไป
-/*
+
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Prescription.class)
   @JoinColumn(name = "Prescription_ID", insertable = true)
   private Prescription prescription ;
-*/
 
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Drug.class)
+  @JoinColumn(name = "Drug_ID", insertable = true)
+  private Drug drug ;
 
 }
