@@ -31,11 +31,19 @@ public class DrugDispense {
     @Column(name = "DRUGDISPENSE_ID", unique = true, nullable = true)
     private @NonNull Long id;
 
-    @Column(name="Patient_ID")
-    private @NonNull String Patient_ID;
-
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugDispenseChannel.class)
     @JoinColumn(name = "DrugDispenseChannel_ID", insertable = true)
     private DrugDispenseChannel drugdispensechannel;
-  
+    
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Pharmacist.class)
+    @JoinColumn(name = "Pharmacist_ID", insertable = true)
+    private Pharmacist pharmacist;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitlePharmacist.class)
+    @JoinColumn(name = "TitlePharmacist_ID",insertable = true)
+    private TitlePharmacist TitlePharmacist ;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Prescription.class)
+    @JoinColumn(name = "Prescription_ID",insertable = true)
+    private Prescription prescription;
 }
