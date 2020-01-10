@@ -52,7 +52,7 @@
                     label="ชื่อ-สกุล"
                     v-model="DrugDispense.pharmacistId"
                     :items="pharmacists"
-                    item-text="pharmacist"
+                    item-text="name"
                     item-value="id"
                     
                     ></v-select>
@@ -102,9 +102,9 @@ export default {
         drugdispensechannelId: "",
         titlepharmacistId:"",
         pharmacistId:"",
-        itemsId:""
+        
       },
-      
+      items:[],
       drugdispensechannels:[],
       titlepharmacists:[],
       pharmacists:[],
@@ -139,8 +139,8 @@ export default {
             });
     },
 
-    getPharmacists(){
-        http
+    getPharmacists() {   
+      http
         .get("/pharmacist")
         .then(response => {
           this.pharmacists = response.data;
@@ -150,7 +150,17 @@ export default {
           console.log(e);
         });
     },
-
+    getTitlePharmacists() {   
+      http
+        .get("/titlepharmacist")
+        .then(response => {
+          this.titlepharmacists = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     clear() {
       this.saveSC = false;
       this.saveUSC = false;
@@ -182,6 +192,7 @@ export default {
   mounted() {
     this.getDrugDispenseChannels();
     this.getPharmacists();
+    this.getTitlePharmacists();
   }
 };
 
