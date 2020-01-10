@@ -58,7 +58,7 @@ public class PharmacistController {
     }
 
 
-    @PostMapping("/pharmacist/{province_id}/{sex_id}/{titlepharmacist_id}/{id_card}/{name}/{birthday}/{age}/{address}/{phone}/{mail}")
+    @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{birthday}/{age}/{province_id}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
     @PathVariable long id_card,
     @PathVariable long province_id,
