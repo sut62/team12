@@ -57,6 +57,12 @@ public class DrugController {
         return drugRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/drug/{id}")
+    public  Optional <Drug> Drugs(@PathVariable Long id){
+            Optional<Drug> drug = drugRepository.findById(id);
+            return drug;
+    }
+
     
 
     @PostMapping("/drug/{drugname}/{DrugCategory_id}/{Unit_of_medicine_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
