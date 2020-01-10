@@ -23,7 +23,7 @@ public class DrugCategoryController {
     }
 
     @GetMapping("/drugcategory")
-    public Collection<DrugCategory> DrugCategorys() {
+    public Collection<DrugCategory> drugcategory() {
         return drugcategoryRepository.findAll().stream().collect(Collectors.toList());
     }
 
