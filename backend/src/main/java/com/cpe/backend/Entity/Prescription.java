@@ -50,4 +50,8 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Unit_of_medicine.class)
     @JoinColumn(name = "Unit_of_medicine_ID", insertable = true)
     private Unit_of_medicine unit_of_medicine;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Unit_of_medicine.class)
+    @JoinColumn(name = "Drug_ID", insertable = true)
+    private Drug drug;
 }
