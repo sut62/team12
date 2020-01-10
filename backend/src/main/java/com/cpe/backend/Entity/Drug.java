@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-//import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +26,7 @@ import javax.persistence.FetchType;
 public class Drug {
 
     @Id
-    @SequenceGenerator(name="drug_seq",sequenceName="drug_seq", initialValue=10000)
+    @SequenceGenerator(name="drug_seq",sequenceName="drug_seq", initialValue=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="drug_seq")
     @Column(name = "DRUG_ID", unique = true, nullable = true)
     private @NonNull Long id;
@@ -42,7 +41,7 @@ public class Drug {
     private @NonNull String sideeffect;
 
     @Column(name="PRICE")
-    private @NonNull Number price;
+    private @NonNull Long price;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Unit_of_medicine.class)
     @JoinColumn(name = "Unit_of_medicine_ID", insertable = true)

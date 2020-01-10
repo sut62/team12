@@ -1,6 +1,15 @@
 <template>
   <v-container>
 
+   <v-container>
+            <div v-if="saveUSC"> <v-alert  outlined dense text type="warning" prominent border="left" > <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง </v-alert>
+            </div>
+
+            <div v-if="saveSC">
+              <v-alert @change="saveUSC = false" dense outlined text prominent type="success" > <strong>บันทึกข้อมูลเรียบร้อย</strong></v-alert>
+            </div>
+    </v-container>
+
     <v-layout text-center wrap>
       <v-flex mb-4>
         <br />
@@ -16,7 +25,7 @@
             <!--ชื่อยา text field -->
             <v-row justify="center">
               <v-col cols="15">
-                <v-text-field block prepend-icon="accessible" label="ชื่อยา" v-model="drug.patientId"    
+                <v-text-field block prepend-icon="sort" label="ชื่อยา" v-model="drug.drugName"    
                 :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required></v-text-field>
             </v-col>
           </v-row>
@@ -28,11 +37,11 @@
               <v-col cols>
                 <v-select
                   label="ชนิดยา"
-                  v-model="drug.unit"
-                  :items="Unit_of_medicine"
+                  v-model="drug.unit_id"
+                  :items="units"
                   item-text="unit"
                   item-value="id"
-                  prepend-icon="access_time"
+                  prepend-icon="view_module"
                   :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
                   required
                 ></v-select>
@@ -46,10 +55,10 @@
                 <v-select
                   label="ประเภทยา"
                   v-model="drug.drugcategory_id"
-                  :items="drugcategorys"
-                  item-text="drugcategoryname"
+                  :items="categorynames"
+                  item-text="category"
                   item-value="id"
-                  prepend-icon="access_time"
+                  prepend-icon="view_quilt"
                   :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
                   required
                 ></v-select>
@@ -62,7 +71,7 @@
               <!--วิธีใช้ text field -->
             <v-row justify="center">
               <v-col cols="15">
-                <v-text-field block prepend-icon="accessible" label="วิธีใช้" v-model="drug.how"    
+                <v-text-field block prepend-icon="check" label="วิธีใช้" v-model="drug.how"    
                 :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required></v-text-field>
             </v-col>
           </v-row>
@@ -71,7 +80,7 @@
              <!--ผลข้างเคียง text field -->
             <v-row justify="center">
               <v-col cols="15">
-                <v-text-field block prepend-icon="accessible" label="ผลข้างเคียง" v-model="drug.how"    
+                <v-text-field block prepend-icon="error_outline" label="ผลข้างเคียง" v-model="drug.sideeffect"    
                 :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required></v-text-field>
             </v-col>
           </v-row>
@@ -80,7 +89,7 @@
               <!--ราคา text field -->
             <v-row justify="center">
               <v-col cols="15">
-                <v-text-field block prepend-icon="accessible" label="ราคา" v-model="drug.price"    
+                <v-text-field block prepend-icon="local_offer" label="ราคา" v-model="drug.price"    
                 :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required></v-text-field>
             </v-col>
           </v-row>
@@ -90,12 +99,12 @@
                 <v-row>
               <v-col cols>
                 <v-select
-                  label="เภสัชก"
+                  label="เภสัชกร"
                   v-model="drug.pharmacist_id"
-                  :items="pharmacist"
-                  item-text="firstname"
+                  :items="pharmacists"
+                  item-text="name"
                   item-value="id"
-                  prepend-icon="access_time"
+                  prepend-icon="person_add"
                   :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
                   required
                 ></v-select>
@@ -120,54 +129,39 @@
 </template>
 <script>
 import http from "../http-common"
-import moment from 'moment'
-import Vue from 'vue';
+//import moment from 'moment'
+//import Vue from 'vue';
 
-
-const options = {
-  name: '_blank',
-  specs: [
-    'fullscreen=yes',
-    'titlebar=yes',
-    'scrollbars=yes'
-  ],
-  
-}
 export default {
   name: "drug",
   data() {
     return {
       drug: {
-        drugname: "",
-        unit: "",
+        drugName: "",
+        unit_id: "",
         drugcategory_id: "",
         how: "",
         sideeffect: "",
         price: "",
         pharmacist_id: "",
-      }
+
+      },
+      units: [],
+      categorynames: [],
+      pharmacists: [],
+
+      saveSC: false,
+      saveUSC: false,
     };
   },
 //-----------------------------------------------------------------------METTODS----------------------------
   methods: {
     /* eslint-disable no-console */
-    getDrugCategorys() {
-      http
-        .get("/drugcategory")
-        .then(response => {
-          this.drugcategorys  = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    
     getUnit() {    
       http
         .get("/unit_of_medicine")
         .then(response => {
-          this.rooms = response.data;
+          this.units = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -175,87 +169,55 @@ export default {
         });
     },
 
-    
-    getPharmacist() {    // ดึงข้อมูล Duration ใส่ combobox
+    /* eslint-disable no-console */
+    getDrugCategorys() {
+      http
+        .get("/drugcategory")
+        .then(response => {
+          this.categorynames  = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    /* eslint-disable no-console */
+    getPharmacist() {   
       http
         .get("/pharmacist")
         .then(response => {
-          this.durations = response.data;
+          this.pharmacists = response.data;
           console.log(response.data);
         })
         .catch(e => {
           console.log(e);
         });
     },
-    // function ค้นหา doctorprofile ด้วย ID
-    findDoctorprofiles() {
-      http
-        .get("/doctorprofile/" + this.drug.doctorprofileId)
-        .then(response => {
-          console.log(response);
-            this.doctorprofileName = response.data.name;
-            this.findRooms();
-            this.findDurations();
-          })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    findDurations() {
-      http
-        .get("/duration/" + this.drug.durationId)
-        .then(response => {
-          console.log(response);
-            this.durationTitle = response.data.time;
-            })
-        .catch(e => {
-          console.log(e);
-        });
-        
-    },
-
-    // function เมื่อกดปุ่ม submit
-    /*
     saveDrug() {
       console.log(this.drug);
       http
         .post(
-          "/drug/" + this.drug.patientId + "/" + this.drug.doctorprofileId + "/" +this.drug.roomId +
-            "/" + this.drug.durationId + "/" + this.date + "/" + this.drug.detail,this.drug 
+          "/drug/" + this.drug.drugName + "/" + this.drug.drugcategory_id + "/" +this.drug.unit_id +
+            "/" + this.drug.how + "/" + this.drug.sideeffect + "/" + this.drug.price + "/" + this.drug.pharmacist_id,this.drug 
         )
        .then(response => {
           console.log(response);
           this.saveSC = true; 
           this.saveUSC = false;
-          this.print(); //สังเรียก Method พิมพ์ใบนัด
-          //this.$router.push("/viewAppm");
-          
         })
         .catch(e => {
           console.log(e);
           this.saveUSC = true; this.saveSC = false;
-
         });
 
     },
-    */
-    clear() {
-      this.$refs.form.reset();
-      this.patientCheck = false;
-      this.patientNotFound = false;
-      this.saveUSC = false;
-      this.saveSC = false;
-      this.sheet= false;
-    },
- 
-
-    
     /* eslint-enable no-console */
     },
   mounted() {
-    this.getdDoctorprofiles();
-    this.getRooms();
-    this.getDurations();
+    this.getDrugCategorys();
+    this.getUnit();
+    this.getPharmacist();
   }
 };
 

@@ -10,6 +10,7 @@ import Login from '../components/Login';
 import personnelSelect from '../components/personnelSelect';
 import docSelect from '../components/docSelect';
 import RecordBill from '../components/RecordBill';
+import Drug from '../components/Drug';
 Vue.use(Router);
 
 
@@ -53,6 +54,10 @@ export default new Router({
         {
             path: '/RecordBill',
             component: RecordBill
+        },
+        {
+            path: '/drug',
+            component: Drug
         },
     ]
     
