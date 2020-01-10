@@ -24,10 +24,12 @@ import com.cpe.backend.Entity.RecordBill;
 import com.cpe.backend.Entity.Cashier;
 import com.cpe.backend.Entity.PaymentChannel;
 import com.cpe.backend.Entity.MedicalRight;
+import com.cpe.backend.Entity.Prescription;
 import com.cpe.backend.repository.RecordBillRepository;
 import com.cpe.backend.repository.CashierRepository;
 import com.cpe.backend.repository.PaymentChannelRepository;
 import com.cpe.backend.repository.MedicalRightRepository;
+import com.cpe.backend.repository.PrescriptionRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -42,6 +44,8 @@ public class RecordBillController {
     private PaymentChannelRepository paymentChannelRepository;
     @Autowired
     private MedicalRightRepository medicalRightRepository;
+    @Autowired
+    private PrescriptionRepository  prescriptionRepository;
 
     RecordBillController(RecordBillRepository recordBillRepository) {
         this.recordBillRepository = recordBillRepository;
@@ -52,22 +56,26 @@ public class RecordBillController {
         return recordBillRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{TotalPrice}")
+    @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{TotalPrice}/{prescription_id}")
     public RecordBill newRecordBill(RecordBill newRecordBill, 
             @PathVariable Integer TotalPrice,
             @PathVariable long MedicalRight_id, 
             @PathVariable long PaymentChannel_id,
-            @PathVariable long Cashier_id) {
+            @PathVariable long Cashier_id,
+            @PathVariable long prescription_id
+            ) {
 
         Cashier cashier = cashierRepository.findById(Cashier_id);
         PaymentChannel paymentChannel = paymentChannelRepository.findById(PaymentChannel_id);
         MedicalRight medicalRight = medicalRightRepository.findById(MedicalRight_id);
+        Prescription prescription = prescriptionRepository.findById(prescription_id);
 
         newRecordBill.setCashier(cashier);
         newRecordBill.setPaymentChannel(paymentChannel);
         newRecordBill.setMedicalRight(medicalRight);
         newRecordBill.setTotalPrice(TotalPrice);
         newRecordBill.setCreateDate(new Date());
+        newRecordBill.setPrescription(prescription);
 
         return recordBillRepository.save(newRecordBill); // บันทึก Objcet ชื่อ RecordBill
 

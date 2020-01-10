@@ -2,137 +2,135 @@
   <v-container>
     <div v-if="saveUSC">
       <v-alert outlined dense text type="warning" prominent border="left">
-        <strong>ไม่สามารถบันทึกได้</strong> กรุณากรอกข้อมูลให้ครบก่อนบันทึกข้อมูล
+        <strong>ไม่สามารถบันทึกได้</strong>
+        กรุณากรอกข้อมูลให้ครบก่อนบันทึกข้อมูล
       </v-alert>
     </div>
 
     <div v-if="saveSC">
-      <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+      <v-alert dense outlined text prominent type="success"
+        >บันทึกข้อมูลสำเร็จ</v-alert
+      >
     </div>
     <v-row>
-      
       <v-col md="5">
         <h1>ใบเสร็จยา</h1>
-      <!-- ผูกข้อมูลid_card กับ textfield-->
-      <v-row> 
-        <v-col cols="12" md="6">
-          <v-text-field
-            label="รหัสประจำตัวประชาชน"
-            outlined
-            maxlenght="13"
-          ></v-text-field>
-        </v-col>
-        <div class="my-2" right >
-        <v-btn absolute height="60px" width="100px" color="blue">ค้นหา</v-btn>
-      </div>
-      </v-row>
-      <v-row >
-        <!-- ผูกข้อมูลibloodgroupId กับ combobox-->
-        <v-col class="d-flex" cols="12" md="6">
-          <v-select
-            label="สิทธิการรักษา"
-            v-model="RecordBill.medicalRightId"
-            :items="medicalRights"
-            item-text="medicalRight"
-            item-value="id"
-          ></v-select>
-        </v-col>
-        <v-col class="d-flex" cols="12" md="6" >
-          <v-select
-            label="ช่องชำระเงินที่ ..."
-            v-model="RecordBill.paymentchannelId"
-            :items="paymentchannels"
-            item-text="channel"
-            item-value="id"
-          ></v-select>
-        </v-col>
-      </v-row>
-        <v-row >
-        <v-col cols="12" md="4">
-          <v-text-field
-            label="รวมราคาสุทธิ"
-            outlined
-            v-model="RecordBill.TotalPrice"
-          ></v-text-field>
-        </v-col>
+        <!-- ค้นหา -->
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-text-field
+              label="รหัสใบสั่งยา"
+              outlined
+              maxlenght="13"
+            ></v-text-field>
+          </v-col>
+          <div class="my-2" right>
+            <v-btn absolute height="60px" width="100px" color="blue"
+              >ค้นหา</v-btn
+            >
+          </div>
         </v-row>
 
-      <!-- ผู้รับเงิน -->
-      <v-row>
-        <v-col class="d-flex" cols="12" md="4" >
-          <v-select
-            label="ผู้รับเงิน"
-            v-model="RecordBill.cashierId"
-            :items="cashiers"
-            item-text="cashier"
-            item-value="id"
-          ></v-select>
-        </v-col>
-      </v-row>
-         <!-- ปุ่ม click-->
-      <v-row justify="center" >
-        <v-col class="d-flex">
-        <v-btn class="yellow" @click="saveRecordBills">SAVE</v-btn>
-        </v-col>
-      </v-row>
-      </v-col>
-      <!-- ตาราง -->
-        <v-col >
-          <v-row >
-            <v-col   cols="12">
-              <v-data-table 
-              :headers="headers"
-              :items="items" 
-              :items-per-page="10" 
-              class="elevation-1">
+        <v-row>
+          <!-- ผูกข้อมูลmedicalRightId กับ combobox-->
+          <v-col class="d-flex" cols="12" md="6">
+            <v-select
+              label="สิทธิการรักษา"
+              v-model="RecordBill.medicalRightId"
+              :items="medicalRights"
+              item-text="medicalRight"
+              item-value="id"
+            ></v-select>
+          </v-col>
 
-              </v-data-table>
-            </v-col>
-          </v-row>
-      </v-col>  
+          <!-- ผูกข้อมูลmpaymentChannelId กับ combobox-->
+          <v-col class="d-flex" cols="12" md="6">
+            <v-select
+              label="ช่องชำระเงินที่ ..."
+              v-model="RecordBill.paymentchannelId"
+              :items="paymentchannels"
+              item-text="channel"
+              item-value="id"
+            ></v-select>
+          </v-col>
+        </v-row>
+
+        <!-- ผูกข้อมูลTotalPrice กับ TextField-->
+        <v-row>
+          <v-col cols="12" md="4">
+            <v-text-field
+              label="รวมราคาสุทธิ"
+              outlined
+              v-model="RecordBill.TotalPrice"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+
+        <!-- ผูกข้อมูลcashierId กับ combobox-->
+        <v-row>
+          <v-col class="d-flex" cols="12" md="4">
+            <v-select
+              label="ผู้รับเงิน"
+              v-model="RecordBill.cashierId"
+              :items="cashiers"
+              item-text="cashier"
+              item-value="id"
+            ></v-select>
+          </v-col>
+        </v-row>
+
+        <!-- ปุ่ม SAVE -->
+        <v-row justify="center">
+          <v-col class="d-flex">
+            <v-btn class="yellow" @click="saveRecordBills">SAVE</v-btn>
+          </v-col>
+        </v-row>
+      </v-col>
+      <!-- ตารางรายการยา -->
+      <v-col>
+        <v-row>
+          <v-col cols="12">
+            <v-data-table
+              :headers="headers"
+              :items="items"
+              :items-per-page="10"
+              class="elevation-1"
+            >
+            </v-data-table>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import http from "../http-common";
-import moment from "moment";
-
+import http from '../http-common';
 export default {
-  computed: {
-    computedDateFormattedMomentjs() {
-      return this.birthday
-        ? moment(this.birthday).format("dddd Do, MMMM YYYY")
-        : "";
-    }
-  },
-  name: "RecordBill",
+  name: 'RecordBill',
   data() {
     return {
       RecordBill: {
-        patientId: "",
-        paymentchannelId: "",
-        medicalRightId: "",
-        cashierId: "",
-        items:"",
-        TotalPrice:""
+        paymentchannelId: '',
+        medicalRightId: '',
+        cashierId: '',
+        TotalPrice: ''
       },
-      
+      items: [],
       paymentchannels: [],
       cashiers: [],
       medicalRights: [],
       saveUSC: false,
       saveSC: false,
       menu: false,
-      birthday: "",
       menu1: false,
       headers: [
-        { text: "Prescription Id", value: "doctorProfile.id" },
-        { text: "ชื่อยา", value: "doctorProfile.name" },
-        { text: "ราคายา", value: "room.room" },
-        { text: "จำนวนของยา", value: "day.day" },
-        { text: "หน่วยของยา", value: "periodTime.periodTime" }
-      ],
+        { text: 'Prescription Id', value: 'doctorProfile.id' },
+        { text: 'ชื่อยา', value: 'doctorProfile.name' },
+        { text: 'ราคายา', value: 'room.room' },
+        { text: 'จำนวนของยา', value: 'day.day' },
+        { text: 'หน่วยของยา', value: 'periodTime.periodTime' }
+      ]
     };
   },
   methods: {
@@ -140,7 +138,7 @@ export default {
     // ดึงข้อมูล PaymentChannel ใส่ combobox
     getPaymentChannels() {
       http
-        .get("/paymentChannel")
+        .get('/paymentChannel')
         .then(response => {
           this.paymentchannels = response.data;
         })
@@ -151,7 +149,7 @@ export default {
     // ดึงข้อมูล Cashier ใส่ combobox
     getCashiers() {
       http
-        .get("/cashier")
+        .get('/cashier')
         .then(response => {
           this.cashiers = response.data;
         })
@@ -159,10 +157,10 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล Gender ใส่ combobox
+    // ดึงข้อมูล MedicalRight ใส่ combobox
     getMedicalRights() {
       http
-        .get("/medicalRight")
+        .get('/medicalRight')
         .then(response => {
           this.medicalRights = response.data;
         })
@@ -175,20 +173,19 @@ export default {
     saveRecordBills() {
       http
         .post(
-          "/recordBill/" +
+          '/recordBill/' +
             this.RecordBill.medicalRightId +
-            "/" +
+            '/' +
             this.RecordBill.paymentchannelId +
-            "/" +
+            '/' +
             this.RecordBill.cashierId +
-            "/" +
+            '/' +
             this.RecordBill.TotalPrice
         )
         .then(response => {
           this.saveUSC = false;
           this.saveSC = true;
           console.log(response);
-
         })
         .catch(e => {
           console.log(e);
