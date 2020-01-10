@@ -9,6 +9,7 @@ import Examination from '../components/Examination';
 import Login from '../components/Login';
 import personnelSelect from '../components/personnelSelect';
 import docSelect from '../components/docSelect';
+import RecordBill from '../components/RecordBill';
 Vue.use(Router);
 
 
@@ -48,6 +49,10 @@ export default new Router({
         {
             path: '/docselect',
             component: docSelect
+        },
+        {
+            path: '/RecordBill',
+            component: RecordBill
         },
     ]
     

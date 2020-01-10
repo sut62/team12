@@ -31,27 +31,28 @@
         <v-col class="d-flex" cols="12" md="6">
           <v-select
             label="สิทธิการรักษา"
-            v-model="patient.bloodgroupId"
-            :items="bloodgroups"
-            item-text="type"
+            v-model="RecordBill.medicalRightId"
+            :items="medicalRights"
+            item-text="medicalRight"
             item-value="id"
           ></v-select>
         </v-col>
         <v-col class="d-flex" cols="12" md="6" >
           <v-select
             label="ช่องชำระเงินที่ ..."
-            v-model="patient.bloodgroupId"
-            :items="bloodgroups"
-            item-text="type"
+            v-model="RecordBill.paymentchannelId"
+            :items="paymentchannels"
+            item-text="channel"
             item-value="id"
           ></v-select>
         </v-col>
       </v-row>
         <v-row >
-        <v-col right cols="12" md="4">
+        <v-col cols="12" md="4">
           <v-text-field
             label="รวมราคาสุทธิ"
             outlined
+            v-model="RecordBill.TotalPrice"
           ></v-text-field>
         </v-col>
         </v-row>
@@ -61,9 +62,9 @@
         <v-col class="d-flex" cols="12" md="4" >
           <v-select
             label="ผู้รับเงิน"
-            v-model="patient.bloodgroupId"
-            :items="bloodgroups"
-            item-text="type"
+            v-model="RecordBill.cashierId"
+            :items="cashiers"
+            item-text="cashier"
             item-value="id"
           ></v-select>
         </v-col>
@@ -71,7 +72,7 @@
          <!-- ปุ่ม click-->
       <v-row justify="center" >
         <v-col class="d-flex">
-        <v-btn class="yellow" @click="savePatients">SAVE</v-btn>
+        <v-btn class="yellow" @click="saveRecordBills">SAVE</v-btn>
         </v-col>
       </v-row>
       </v-col>
@@ -105,28 +106,21 @@ export default {
         : "";
     }
   },
-  name: "patient",
+  name: "RecordBill",
   data() {
     return {
-      patient: {
+      RecordBill: {
         patientId: "",
-        titlenameId: "",
-        bloodgroupId: "",
-        provinceId: "",
-        genderId: "",
-        firstname: "",
-        lastname: "",
-        age: "",
-        address: "",
-        drugallergy: "",
-        congenitaldisease: "",
-        id_card: ""
+        paymentchannelId: "",
+        medicalRightId: "",
+        cashierId: "",
+        items:"",
+        TotalPrice:""
       },
-      titlenames: [],
-      genders: [],
-      bloodgroups: [],
-      provinces: [],
-      tempGender: [],
+      
+      paymentchannels: [],
+      cashiers: [],
+      medicalRights: [],
       saveUSC: false,
       saveSC: false,
       menu: false,
@@ -143,58 +137,34 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    // 
-    filterGender() {
-      this.genders = [];
-      this.patient.genderId = "";
-      if (
-        this.titlenames[this.patient.titlenameId - 1].name === "นาย" ||
-        this.titlenames[this.patient.titlenameId - 1].name === "เด็กชาย"
-      ) {
-        this.genders.push(this.tempGender[0]);
-      } else {
-        this.genders.push(this.tempGender[1]);        
-      }
-    },
-    // ดึงข้อมูล TitleName ใส่ combobox
-    getTitleNames() {
+    // ดึงข้อมูล PaymentChannel ใส่ combobox
+    getPaymentChannels() {
       http
-        .get("/titlename")
+        .get("/paymentChannel")
         .then(response => {
-          this.titlenames = response.data;
+          this.paymentchannels = response.data;
         })
         .catch(e => {
           console.log(e);
         });
     },
-    // ดึงข้อมูล BloodGroup ใส่ combobox
-    getBloodGroups() {
+    // ดึงข้อมูล Cashier ใส่ combobox
+    getCashiers() {
       http
-        .get("/bloodgroup")
+        .get("/cashier")
         .then(response => {
-          this.bloodgroups = response.data;
+          this.cashiers = response.data;
         })
         .catch(e => {
           console.log(e);
         });
     },
     // ดึงข้อมูล Gender ใส่ combobox
-    getGenders() {
+    getMedicalRights() {
       http
-        .get("/gender")
+        .get("/medicalRight")
         .then(response => {
-          this.tempGender = response.data;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    // ดึงข้อมูล Province ใส่ combobox
-    getProvinces() {
-      http
-        .get("/province")
-        .then(response => {
-          this.provinces = response.data;
+          this.medicalRights = response.data;
         })
         .catch(e => {
           console.log(e);
@@ -202,33 +172,17 @@ export default {
     },
     /* eslint-disable */
     // function เมื่อกดปุ่ม SAVE
-    savePatients() {
+    saveRecordBills() {
       http
         .post(
-          "/patient/" +
-            this.patient.id_card +
+          "/recordBill/" +
+            this.RecordBill.medicalRightId +
             "/" +
-            this.patient.titlenameId +
+            this.RecordBill.paymentchannelId +
             "/" +
-            this.patient.genderId +
+            this.RecordBill.cashierId +
             "/" +
-            this.patient.bloodgroupId +
-            "/" +
-            this.patient.firstname +
-            "/" +
-            this.patient.lastname +
-            "/" +
-            this.patient.age +
-            "/" +
-            this.birthday +
-            "/" +
-            this.patient.address +
-            "/" +
-            this.patient.provinceId +
-            "/" +
-            this.patient.drugallergy +
-            "/" +
-            this.patient.congenitaldisease
+            this.RecordBill.TotalPrice
         )
         .then(response => {
           this.saveUSC = false;
@@ -245,10 +199,9 @@ export default {
     /* eslint-enable no-console */
   },
   mounted() {
-    this.getTitleNames();
-    this.getBloodGroups();
-    this.getGenders();
-    this.getProvinces();
+    this.getPaymentChannels();
+    this.getCashiers();
+    this.getMedicalRights();
   }
 };
 </script>
