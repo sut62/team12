@@ -24,6 +24,8 @@ import com.cpe.backend.Entity.Prescription;
 import com.cpe.backend.Entity.Doctor;
 import com.cpe.backend.Entity.TitleName;
 import com.cpe.backend.Entity.Unit_of_medicine;
+import com.cpe.backend.Entity.Drug;
+import com.cpe.backend.repository.DrugRepository;
 import com.cpe.backend.repository.PrescriptionRepository;
 import com.cpe.backend.repository.DoctorRepository;
 import com.cpe.backend.repository.TitleNameRepository;
@@ -42,6 +44,8 @@ public class PrescriptionController {
     private TitleNameRepository titleNameRepository;
     @Autowired
     private Unit_of_medicineRepository unit_of_medicineRepository;
+    @Autowired
+    private DrugRepository drugRepository;
 
     PrescriptionController(PrescriptionRepository prescriptionRepository) {
         this.prescriptionRepository = prescriptionRepository;
@@ -52,22 +56,26 @@ public class PrescriptionController {
         return prescriptionRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/prescription/{patient_ID}/{Doctor_id}/{TitleName_id}/{Unit_of_medicine_id}")
+    @PostMapping("/prescription/{patient_ID}/{TitleName_id}/{name}/{age}/{drugallergy}/{Doctor_id}/{Drug_id}/{amount}/{Unit_of_medicine_id}")
     public Prescription newPrescription(Prescription newPrescription, @PathVariable String patient_ID,
             @PathVariable String name, @PathVariable Integer age, @PathVariable String drugallergy,
-            @PathVariable long TitleName_id, @PathVariable long Doctor_id, @PathVariable long Unit_of_medicine_id) {
+            @PathVariable Integer amount, @PathVariable long Drug_id, @PathVariable long TitleName_id,
+            @PathVariable long Doctor_id, @PathVariable long Unit_of_medicine_id) {
 
-        Doctor doctor_name = doctorRepository.findById(Doctor_id);
         TitleName titleName = titleNameRepository.findById(TitleName_id);
+        Doctor doctor_name = doctorRepository.findById(Doctor_id);
+        Drug drug = drugRepository.findById(Drug_id);
         Unit_of_medicine unit = unit_of_medicineRepository.findById(Unit_of_medicine_id);
 
-        newPrescription.setDoctor_name(doctor_name);
-        newPrescription.setTitleName(titleName);
-        newPrescription.setUnit_of_medicine(unit);
         newPrescription.setPatient_ID(patient_ID); // setตามด้วยชื่อตัวแปร
+        newPrescription.setTitleName(titleName);
         newPrescription.setName(name);
         newPrescription.setAge(age);
         newPrescription.setDrugallergy(drugallergy);
+        newPrescription.setDoctor_name(doctor_name);
+        newPrescription.setUnit_of_medicine(unit);
+        newPrescription.setDrug(drug);
+        newPrescription.setAmount(amount);
         newPrescription.setCreateDate(new Date());
 
         return prescriptionRepository.save(newPrescription); // บันทึก Objcet ชื่อ Prescription
