@@ -3,17 +3,12 @@ package com.cpe.backend.Entity;
 import lombok.*;
 
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import java.util.Collection;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 
 @Data
 @Entity
@@ -29,6 +24,4 @@ public class TitleName {
 
     private @NonNull String titlename;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Prescription> prescription;
 }
