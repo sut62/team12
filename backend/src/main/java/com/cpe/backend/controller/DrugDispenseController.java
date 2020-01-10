@@ -22,8 +22,15 @@ import java.net.URLDecoder;
 
 import com.cpe.backend.Entity.DrugDispense;
 import com.cpe.backend.Entity.DrugDispenseChannel;
+import com.cpe.backend.Entity.Pharmacist;
+import com.cpe.backend.Entity.TitlePharmacist;
+import com.cpe.backend.Entity.Prescription;
+
 import com.cpe.backend.repository.DrugDispenseRepository;
 import com.cpe.backend.repository.DrugDispenseChannelRepository;
+import com.cpe.backend.repository.PharmacistRepository;
+import com.cpe.backend.repository.TitlePharmacistRepository;
+import com.cpe.backend.repository.PrescriptionRepository;
 
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,10 +39,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 public class DrugDispenseController {
     @Autowired
-    private final DrugDispenseRepository drugDispenseRepository;
+    private DrugDispenseRepository drugDispenseRepository;
     @Autowired
     private DrugDispenseChannelRepository drugDispenseChannelRepository;
-   
+    @Autowired
+    private PharmacistRepository pharmacistRepository;
+    @Autowired
+    private TitlePharmacistRepository titlepharmacistRepository;
+    @Autowired
+    private PrescriptionRepository  prescriptionRepository;
+
     DrugDispenseController(DrugDispenseRepository drugDispenseRepository) {
         this.drugDispenseRepository = drugDispenseRepository;
     }
@@ -45,15 +58,25 @@ public class DrugDispenseController {
         return drugDispenseRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/drugdispense/{DrugDispenseChannel_id}")
+    @PostMapping("/drugdispense/{DrugDispenseChannel_id}/{titlepharmacist_id}/{pharmacist_id}/{prescription_id}")
     public DrugDispense newDrugDispense(DrugDispense newDrugDispense, 
-            @PathVariable long DrugDispenseChannel_id) {
+            @PathVariable long DrugDispenseChannel_id,
+            @PathVariable long titlepharmacist_id,
+            @PathVariable long pharmacist_id,
+            @PathVariable long prescription_id
+            ) {
 
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(DrugDispenseChannel_id);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(titlepharmacist_id);
+        Pharmacist pharmacist = pharmacistRepository.findById(pharmacist_id);
+        Prescription prescription = prescriptionRepository.findById(prescription_id);
 
         newDrugDispense.setDrugdispensechannel(drugdispensechannel);
+        newDrugDispense.setTitlePharmacist(titlepharmacist);
+        newDrugDispense.setPharmacist(pharmacist);
+        newDrugDispense.setPrescription(prescription);
 
-        return drugDispenseRepository.save(newDrugDispense); // บันทึก Objcet ชื่อ RecordBill
+        return drugDispenseRepository.save(newDrugDispense); // บันทึก Objcet ชื่อ DrugDispense
 
     }
 }
