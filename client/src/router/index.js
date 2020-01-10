@@ -11,6 +11,7 @@ import personnelSelect from '../components/personnelSelect';
 import docSelect from '../components/docSelect';
 import RecordBill from '../components/RecordBill';
 import Drug from '../components/Drug';
+import DrugDispense from '../components/DrugDispense';
 Vue.use(Router);
 
 
@@ -26,6 +27,10 @@ export default new Router({
         },{
             path: '/doctorprofile',
             component: DoctorProfile
+        },
+        {
+            path: '/drugdispense',
+            component: DrugDispense
         },
         {
             path: '/appointments',
