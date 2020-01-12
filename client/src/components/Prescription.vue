@@ -58,16 +58,15 @@
               <template v-slot:activator="{ on }">
                 <v-btn color="purple" dark v-on="on">เพิ่มข้อมูลการสั่งยา</v-btn>
               </template>
-              <v-sheet class="text-center" height="850px">
+              <v-sheet class="text-center" height="950px">
                 <div>
                   <h1>รายการยาที่แพทย์สั่ง</h1>
                   <br />
                   <v-row justify="center">
-                    <!-- Patient ID text field -->
+                    <!-- Drug ID text field -->
                     <v-col cols="6" md="4">
                       <v-text-field
                         block
-                        prepend-icon="accessible"
                         label="รหัสยา"
                         v-model="prescription.Drug_id"
                         :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
@@ -80,6 +79,15 @@
               </div>
             </v-col>
                   </v-row>
+                  <v-container>
+                    <v-row justify="center">
+            <div v-if="drugNotFound">
+      <v-alert dense outlined type="error">
+        <strong>ไม่พบข้อมูล</strong> กรุณากรอกข้อมูลอีกครั้ง
+      </v-alert>
+    </div>
+            </v-row>
+    </v-container>
                   <v-row justify="center">
                     <v-col cols="8" md="2">
                       <v-text-field label="ชื่อยา" v-model="prescription.drugname" disabled></v-text-field>
@@ -101,6 +109,8 @@
                         required
                       ></v-select>
                     </v-col>
+                    <v-btn @click="savePrescription" class="mt-2" tile outlined color="green">
+            <v-icon left>save</v-icon> บันทึกข้อมูลการสั่งยา</v-btn>
                   </v-row>
                   <v-container>
             <div v-if="saveUSC"> <v-alert  outlined dense text type="warning" prominent border="left" > <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง </v-alert>
@@ -111,12 +121,11 @@
             </div>
     </v-container>
                     <v-row justify="center">
-          <v-btn @click="savePrescription" class="mt-2" tile outlined color="green">
-            <v-icon left>save</v-icon> บันทึกข้อมูลการสั่งยา</v-btn> 
+           
             </v-row>
                   <v-col>
                     <v-row justify="center">
-                      <v-col cols="8">
+                      <v-col cols="12" md = "6">
                         <v-data-table
                           :headers="headers"
                           :items="items"
@@ -166,14 +175,13 @@ export default {
       doctorname:[],
       unit:[],
       items:[],
-
-
-      headers: [
-        { text: "PRESCRIPTION_ID",value: "prescriptions.id" },
-    
-      ]
-
-
+       headers: [
+        { text: "Prescription ID", value: "id" },
+        { text: "ชื่อยา", value: "drug.drugname" },
+        { text: "จำนวนยา", value: "amount" },
+        { text: "หน่วยของยา", value: "unit_of_medicine.unit" },
+        { text: "ราคา/หน่วย", value: "drug.price" },
+      ],
     };
   },
   methods: {
