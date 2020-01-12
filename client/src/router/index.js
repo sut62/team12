@@ -6,6 +6,7 @@ import DoctorProfile from '../components/DoctorProfile';
 import MedicineLabel from '../components/MedicineLabel';
 import PatientInformation from '../components/PatientInformation';
 import Examination from '../components/Examination';
+import Prescription from '../components/Prescription';
 import Login from '../components/Login';
 import personnelSelect from '../components/personnelSelect';
 import docSelect from '../components/docSelect';
@@ -47,6 +48,10 @@ export default new Router({
         {
             path: '/examination',
             component: Examination
+        },
+        {
+            path: '/prescription',
+            component: Prescription
         },
         {
             path: '/personnelSelect',
