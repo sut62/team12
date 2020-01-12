@@ -57,7 +57,7 @@ public class PrescriptionController {
     }
     
     @GetMapping("/prescription/{id}")
-    public  Optional <Prescription> Prescriptions(@PathVariable Long id){
+    public  Optional <Prescription> Prescription(@PathVariable Long id){
             Optional<Prescription> prescription = prescriptionRepository.findById(id);
             return prescription;
     }
