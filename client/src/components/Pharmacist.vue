@@ -13,8 +13,6 @@
     <div>
       <h1 class="display-2" text--left>ทะเบียนประวัติเภสัชกร</h1>
       <br />
-
-      <v-form v-model="valid" ref="form">
         <v-col cols="12" md="6">
           <v-text-field label="รหัสบัตรประจำตัวประชาชน" v-model="pharmacist.id_card" counter maxlength="13"></v-text-field>
         </v-col>
@@ -24,10 +22,9 @@
             <v-select
               label="คำนำหน้าชื่อ"
               v-model="pharmacist.titlepharmachistId"
-              :items="title"
-              item-text="title"
+              :items="titlepharmacist"
+              item-text="titlepharmacist"
               item-value="id"
-              v-on:change="filterGender"
             ></v-select>
           </v-col>
 
@@ -96,12 +93,10 @@
         <div class="text-center">
           <v-btn
             @click="savePharmacists"
-            :class="{red : !valid,green : valid}"
             color="darken-2"
             dark
           >SAVE</v-btn>
         </div>
-      </v-form>
     </div>
   </v-container>
 </template>
@@ -146,17 +141,6 @@ export default {
     };
   },
   methods: {
-    filterGender() {
-      this.sex = [];
-      this.pharmacist.sexId = "";
-      if (
-        this.titlepharmacistID[this.pharmacist.titlepharmacistID - 1].titlepharmacistID.includes('หญิง')
-      ) {
-        this.sex.push(this.tempGender[1]);
-      } else {
-        this.sex.push(this.tempGender[0]);
-      }
-    },
 
     /* eslint-disable no-console */
 
@@ -177,7 +161,7 @@ export default {
       http
         .get("/sex")
         .then(response => {
-          this.tempGender = response.data;
+          this.sex = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -227,8 +211,8 @@ export default {
             "/" +
             this.pharmacist.phone +
             "/" +
-            this.pharmacist.mail 
-
+            this.pharmacist.mail
+             ,this.pharmacist
         )
         .then(response => {
           console.log(response);
