@@ -32,9 +32,11 @@ import com.cpe.backend.repository.MedicineQuantityRepository;
 
 //ใช้ร่วมกับเพื่อน
 import com.cpe.backend.Entity.Prescription;
+import com.cpe.backend.Entity.Unit_of_medicine;
 import com.cpe.backend.Entity.Drug;
 import com.cpe.backend.repository.PrescriptionRepository;
 import com.cpe.backend.repository.DrugRepository;
+import com.cpe.backend.repository.Unit_of_medicineRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -54,6 +56,7 @@ public class MedicineLabelController {
     @Autowired
     private MedicineQuantityRepository medicineQuantityRepository;
     
+    
    
 
     MedicineLabelController(MedicineLabelRepository medicineLabelRepository) { //name controller:name reoository
@@ -66,14 +69,15 @@ public class MedicineLabelController {
     }
 
     @PostMapping("/MedicineLabel/{Prescription_id}/{Drug_id}/{quantity}/{medicineQuantity_id}/{medicineFrequency_id}/{medicineDuration_id}")
-    public MedicineLabel newSchedule(MedicineLabel newMedicineLabel,
+    public MedicineLabel newMedicineLabel(MedicineLabel newMedicineLabel,
     
      @PathVariable long Prescription_id,
-     @PathVariable long Drug_id,
-    @PathVariable String quantity,
+     @PathVariable long Drug_id, 
+     @PathVariable String quantity,
      @PathVariable long medicineQuantity_id,
-    @PathVariable long medicineFrequency_id,
-    @PathVariable long medicineDuration_id)
+     @PathVariable long medicineFrequency_id,
+     @PathVariable long medicineDuration_id)
+     
 
     {
     
