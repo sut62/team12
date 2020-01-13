@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.sql.Date;
 import java.util.Collection;
 //import java.util.Date;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,18 +41,23 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 public class DrugController {
     @Autowired
-    private final DrugRepository drugRepository;
+    private DrugRepository drugRepository;
     @Autowired
     private Unit_of_medicineRepository unit_of_medicineRepository;
     @Autowired
     private DrugCategoryRepository drugcategoryRepository;
     @Autowired
     private PharmacistRepository pharmacistRepository;
-   
+
 
     DrugController(DrugRepository drugRepository) {
         this.drugRepository = drugRepository;
     }
+
+    @RequestMapping(value = "drug/drugname/{drugname}")
+        public List<Drug> getDrugByDrugname(@PathVariable String drugname) {
+            return drugRepository.findByDrugname(drugname);
+        }
 
     @GetMapping("/drug")
     public Collection<Drug> Drug() {
