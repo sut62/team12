@@ -10,26 +10,33 @@
       <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
     </div>
 
+
     <div>
       <h1 class="display-2" text--left>ทะเบียนประวัติเภสัชกร</h1>
       <br />
+     <v-form v-model="valid" ref="form" >
         <v-col cols="12" md="6">
-          <v-text-field label="รหัสบัตรประจำตัวประชาชน" v-model="pharmacist.id_card" counter maxlength="13"></v-text-field>
+          <v-text-field label="รหัสบัตรประจำตัวประชาชน" v-model="pharmacist.id_card" counter maxlength="13"
+          :rules="[(v) => !!v || 'Item is required']"
+                  required></v-text-field>
         </v-col>
 
         <v-row>
           <v-col cols="12" md="2">
             <v-select
               label="คำนำหน้าชื่อ"
-              v-model="pharmacist.titlepharmachistId"
+              v-model="pharmacist.titlepharmacistId"
               :items="titlepharmacist"
               item-text="titlepharmacist"
               item-value="id"
+              v-on:change="filterGender"
             ></v-select>
           </v-col>
 
           <v-col cols="12" md="8">
-            <v-text-field label="ชื่อ-สกุล" v-model="pharmacist.name"></v-text-field>
+            <v-text-field label="ชื่อ-สกุล" v-model="pharmacist.name"
+            :rules="[(v) => !!v || 'Item is required']"
+                  required></v-text-field>
           </v-col>
         </v-row>
 
@@ -62,7 +69,9 @@
           </v-col>
 
           <v-col cols="12" md="2">
-            <v-text-field label="อายุ" suffix="ปี" v-model="pharmacist.age"></v-text-field>
+            <v-text-field label="อายุ" suffix="ปี" v-model="pharmacist.age"
+              :rules="[(v) => !!v || 'Item is required']"
+                  required ></v-text-field>
           </v-col>
         </v-row>
 
@@ -78,13 +87,20 @@
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field label="ที่อยู่" v-model="pharmacist.address"></v-text-field>
+            <v-text-field label="ที่อยู่" v-model="pharmacist.address"
+            :rules="[(v) => !!v || 'Item is required']"
+                  required></v-text-field>
           </v-col>
              <v-col cols="12" md="3">
-            <v-text-field label="โทรศัพท์" v-model="pharmacist.phone"></v-text-field>
+            <v-text-field label="โทรศัพท์" v-model="pharmacist.phone"
+            :rules="[(v) => !!v || 'Item is required']"
+                  required></v-text-field>
           </v-col>
             <v-col cols="12" md="5">
-            <v-text-field label="E-mail" v-model="pharmacist.mail"></v-text-field>
+            <v-text-field label="E-mail" v-model="pharmacist.mail"
+            :rules="[(v) => !!v || 'Item is required']"
+                  required
+            ></v-text-field>
           </v-col>
 
         </v-row>
@@ -93,10 +109,12 @@
         <div class="text-center">
           <v-btn
             @click="savePharmacists"
+            :class="{red : !valid,green : valid}"
             color="darken-2"
             dark
           >SAVE</v-btn>
         </div>
+        </v-form>
     </div>
   </v-container>
 </template>
@@ -127,6 +145,7 @@ export default {
       address: "",
       id_card: ""
       },
+      valid: false,
       saveSC: false,
       saveUSC: false,
 
@@ -141,7 +160,17 @@ export default {
     };
   },
   methods: {
-
+    filterGender() {
+      this.sex = [];
+      this.pharmacist.sexId = "";
+      if (
+        this.titlepharmacist[this.pharmacist.titlepharmacistId - 1].titlepharmacist === "เภสัชกรชาย"
+      ) {
+        this.sex.push(this.tempGender[0]);
+      } else {
+        this.sex.push(this.tempGender[1]);
+      }
+    },
     /* eslint-disable no-console */
 
     // ดึงข้อมูล Title ใส่ combobox
@@ -161,7 +190,7 @@ export default {
       http
         .get("/sex")
         .then(response => {
-          this.sex = response.data;
+          this.tempGender = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -192,7 +221,7 @@ export default {
       console.log(this.Pharmacists);
       http
         .post(
-          "/Pharmacist/" +
+          "/pharmacist/" +
             this.pharmacist.id_card +
             "/" +
             this.pharmacist.titlepharmacistId +
