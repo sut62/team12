@@ -32,7 +32,7 @@ public class RecordBill {
     @Column(name = "RecordBill_ID", unique = true, nullable = true)
 
     private @NonNull Long ID;
-    private @NonNull Integer TotalPrice ;
+    private @NonNull Integer DrugPrice;
     private @NonNull Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PaymentChannel.class)

@@ -56,9 +56,9 @@ public class RecordBillController {
         return recordBillRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{TotalPrice}/{prescription_id}")
+    @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{DrugPrice}/{prescription_id}")
     public RecordBill newRecordBill(RecordBill newRecordBill, 
-            @PathVariable Integer TotalPrice,
+            @PathVariable Integer DrugPrice,
             @PathVariable long MedicalRight_id, 
             @PathVariable long PaymentChannel_id,
             @PathVariable long Cashier_id,
@@ -73,7 +73,7 @@ public class RecordBillController {
         newRecordBill.setCashier(cashier);
         newRecordBill.setPaymentChannel(paymentChannel);
         newRecordBill.setMedicalRight(medicalRight);
-        newRecordBill.setTotalPrice(TotalPrice);
+        newRecordBill.setDrugPrice(DrugPrice);
         newRecordBill.setCreateDate(new Date());
         newRecordBill.setPrescription(prescription);
 
