@@ -27,7 +27,7 @@ import javax.persistence.FetchType;
 public class Prescription {
 
     @Id
-    @SequenceGenerator(name = "Prescription_SEQ", sequenceName = "Prescription_SEQ")
+    @SequenceGenerator(name = "Prescription_SEQ", sequenceName = "Prescription_SEQ", initialValue=120000)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prescription_SEQ")
     @Column(name = "Prescription_ID", unique = true, nullable = true)
 
