@@ -2,10 +2,10 @@
   <v-app>
     <v-app-bar app class="yellow accent-1">
        <v-btn @click="drawer=!drawer" class="ma-2" tile large color="white" icon>
-      <v-icon>MEDICINE ROOM</v-icon>
+      <v-icon></v-icon>
        </v-btn>
       <v-toolbar-title class="headline text-uppercase">
-        <span>P</span>
+        <span>PHARMACY ROOM</span>
         <span class="font-weight-light"> SYSTEM</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
