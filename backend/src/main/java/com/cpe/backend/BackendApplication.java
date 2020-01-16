@@ -78,7 +78,7 @@ public class BackendApplication {
 			});
 
 
-			Stream.of("ภก.","ภกญ.").forEach(titlePharm -> {
+			Stream.of("เภสัชกรชาย","เภสัชกรหญิง").forEach(titlePharm -> {
 				TitlePharmacist titlepharmacist = new TitlePharmacist();
 				titlepharmacist.setTitlepharmacist(titlePharm);
 				titlepharmacistRepository.save(titlepharmacist);
