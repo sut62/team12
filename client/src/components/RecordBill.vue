@@ -38,7 +38,7 @@
             <!-- ผูกข้อมูลTotalPrice กับ TextField-->
             <v-row>
                 <v-col cols="12" md="4">
-                    <v-text-field label="รวมราคาสุทธิ" outlined v-model="RecordBill.TotalPrice"></v-text-field>
+                    <v-text-field label="รวมราคาสุทธิ" outlined v-model="DrugPrice"></v-text-field>
                 </v-col>
             </v-row>
 
@@ -66,6 +66,7 @@
             <v-text-field v-model="N_drug" label="ชื่อยา" disabled></v-text-field>
             <v-text-field v-model="drugamount" label="จำนวนยา" disabled></v-text-field>
             <v-text-field v-model="Unit" label="หน่วยของจำนวนยา" disabled></v-text-field>
+            <v-text-field v-model="DrugPrice" label="ราคายา" disabled></v-text-field>
         </v-col>
     </v-row>
 </v-container>
@@ -91,6 +92,7 @@ export default {
             iDdrug: "",
             N_drug: "",
             drugamount: "",
+            DrugPrice: "",
 
             items: [],
             paymentchannels: [],
@@ -172,6 +174,7 @@ export default {
                         this.drugamount = response.data.amount;
                         this.patientPrescription_id = response.data.Prescription_id;
                         this.Unit = response.data.unit_of_medicine.unit;
+                        this.DrugPrice = response.data.drug.price;
                         this.orderCheck = response.status;
                         this.orderNotFound = false;
                     } else {
@@ -196,7 +199,7 @@ export default {
                     "/" +
                     this.RecordBill.cashierId +
                     "/" +
-                    this.RecordBill.TotalPrice +
+                    this.DrugPrice +
                     "/" +
                     this.RecordBill.prescriptionId
                 )
