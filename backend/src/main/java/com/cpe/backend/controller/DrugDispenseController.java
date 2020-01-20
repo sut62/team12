@@ -58,12 +58,14 @@ public class DrugDispenseController {
         return drugDispenseRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/drugdispense/{DrugDispenseChannel_id}/{titlepharmacist_id}/{pharmacist_id}/{prescription_id}")
+    @PostMapping("/drugdispense/{DrugDispenseChannel_id}/{titlepharmacist_id}/{pharmacist_id}/{prescription_id}/{reciever_name}")
     public DrugDispense newDrugDispense(DrugDispense newDrugDispense, 
             @PathVariable long DrugDispenseChannel_id,
             @PathVariable long titlepharmacist_id,
             @PathVariable long pharmacist_id,
-            @PathVariable long prescription_id
+            @PathVariable long prescription_id,
+            @PathVariable String reciever_name
+
             ) {
 
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(DrugDispenseChannel_id);
@@ -75,6 +77,7 @@ public class DrugDispenseController {
         newDrugDispense.setTitlePharmacist(titlepharmacist);
         newDrugDispense.setPharmacist(pharmacist);
         newDrugDispense.setPrescription(prescription);
+        newDrugDispense.setReciever_name(reciever_name);
 
         return drugDispenseRepository.save(newDrugDispense); // บันทึก Objcet ชื่อ DrugDispense
 

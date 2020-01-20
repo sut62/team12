@@ -31,6 +31,8 @@ public class DrugDispense {
     @Column(name = "DRUGDISPENSE_ID", unique = true, nullable = true)
     private @NonNull Long id;
 
+    private @NonNull String reciever_name;
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugDispenseChannel.class)
     @JoinColumn(name = "DrugDispenseChannel_ID", insertable = true)
     private DrugDispenseChannel drugdispensechannel;

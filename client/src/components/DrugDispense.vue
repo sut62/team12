@@ -1,10 +1,7 @@
 <template>
 <v-container>
-    <div class="text-center">
-        <h1 class="display-2" text--left>ระบบจ่ายยา</h1>
-    </div><br><br>
 
-    <div v-if="orderNotFound">
+     <div v-if="orderNotFound">
         <v-alert dense outlined type="error">
             <strong>ไม่พบข้อมูลใบสั่งยา</strong>กรุณากรอกข้อมูลอีกครั้ง
         </v-alert>
@@ -20,6 +17,10 @@
         <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
         </v-alert>
     </div>
+
+    <div class="text-center">
+        <h1 class="display-2" text--left>ระบบจ่ายยา</h1>
+    </div><br><br>
 
     <v-row>
         <v-col md="6">
@@ -54,7 +55,7 @@
 
                 <!-- combo box คำนำหน้าชื่อ -->
                 <v-col cols="12" md="7">
-                    <v-select label="คำนำหน้าชื่อ" 
+                    <v-select label="คำนำหน้าชื่อ(เภสัชกร)" 
                     v-model="DrugDispense.titlepharmacistId" 
                     :items="titlepharmacists" 
                     item-text="titlepharmacist" 
@@ -65,7 +66,7 @@
 
                 <!-- combobox ชื่อ-สกุล -->
                 <v-col cols="12" md="9">
-                    <v-select label="ชื่อ-สกุล" 
+                    <v-select label="ชื่อ-สกุล(เภสัชกร)" 
                     v-model="DrugDispense.pharmacistId" 
                     :items="pharmacists" 
                     item-text="name" 
@@ -73,6 +74,15 @@
                     </v-select>
                 </v-col>
                 <!---------------------->
+
+                <!-- field ชื่อผู้รับยา -->
+                <v-col cols="12" md="9">
+                    <v-text-field 
+                        v-model="DrugDispense.reciever_name" label="ชื่อผู้รับยา"
+                    ></v-text-field>
+                </v-col>
+                <!------------------>
+
             </v-card>
             <br />
 
@@ -119,6 +129,7 @@ export default {
                 titlepharmacistId: "",
                 pharmacistId: "",
                 prescriptionId: "",
+                reciever_name:"",
             },
             items: [],
             drugdispensechannels: [],
@@ -199,7 +210,7 @@ export default {
                         this.orderNotFound = false;
                     } else {
                         this.clear()
-                        this.OrderNotFound = true;
+                        this.orderNotFound = true;
                     }
                 })
                 .catch(e => {
@@ -216,7 +227,8 @@ export default {
                     this.DrugDispense.drugdispensechannelId +
                     "/" + this.DrugDispense.titlepharmacistId +
                     "/" + this.DrugDispense.pharmacistId +
-                    "/" + this.DrugDispense.prescriptionId
+                    "/" + this.DrugDispense.prescriptionId +
+                    "/" + this.DrugDispense.reciever_name
                 )
                 .then(response => {
                     console.log(response);
