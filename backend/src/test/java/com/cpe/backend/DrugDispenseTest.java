@@ -72,9 +72,8 @@ public class DrugDispenseTest {
     }
 
     @Test
-    void B5915477_testRecieverNameMustNotBeNull(){
+    void B5915477_testRecieve_nameMustNotBeNull(){
         DrugDispense drugdispense = new DrugDispense();
-        
         try{
             drugdispense.setReciever_name(null);
         }

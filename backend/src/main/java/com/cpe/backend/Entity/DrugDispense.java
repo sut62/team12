@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -29,9 +29,9 @@ public class DrugDispense {
     @SequenceGenerator(name="drugdispense_seq",sequenceName="drugdispense_seq", initialValue=20000)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="drugdispense_seq")
     @Column(name = "DRUGDISPENSE_ID", unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NotNull Long id;
 
-    private @NonNull String reciever_name;
+    private @NotNull String reciever_name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugDispenseChannel.class)
     @JoinColumn(name = "DrugDispenseChannel_ID", insertable = true)
