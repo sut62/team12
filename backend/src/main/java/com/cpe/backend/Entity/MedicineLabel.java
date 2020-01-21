@@ -35,6 +35,9 @@ public class MedicineLabel{
 
   private @NonNull Long id;
   private @NonNull String quantity;
+  private @NonNull String drug_name;
+  private @NonNull String effet;
+
 
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicineDuration.class)
@@ -53,8 +56,6 @@ public class MedicineLabel{
   @JoinColumn(name = "Prescription_ID", insertable = true)
   private Prescription prescription ;
 
-  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Drug.class)
-  @JoinColumn(name = "Drug_ID", insertable = true)
-  private Drug drug ;
+
 
 }

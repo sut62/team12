@@ -33,9 +33,7 @@ import com.cpe.backend.repository.MedicineQuantityRepository;
 //ใช้ร่วมกับเพื่อน
 import com.cpe.backend.Entity.Prescription;
 import com.cpe.backend.Entity.Unit_of_medicine;
-import com.cpe.backend.Entity.Drug;
 import com.cpe.backend.repository.PrescriptionRepository;
-import com.cpe.backend.repository.DrugRepository;
 import com.cpe.backend.repository.Unit_of_medicineRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,8 +43,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class MedicineLabelController {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
-    @Autowired
-    private DrugRepository drugRepository;
+   
     @Autowired
     private final MedicineLabelRepository medicineLabelRepository;
     @Autowired
@@ -68,11 +65,12 @@ public class MedicineLabelController {
         return medicineLabelRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/MedicineLabel/{Prescription_id}/{Drug_id}/{quantity}/{medicineQuantity_id}/{medicineFrequency_id}/{medicineDuration_id}")
+    @PostMapping("/MedicineLabel/{Prescription_id}/{drug_name}/{effet}/{quantity}/{medicineQuantity_id}/{medicineFrequency_id}/{medicineDuration_id}")
     public MedicineLabel newMedicineLabel(MedicineLabel newMedicineLabel,
     
      @PathVariable long Prescription_id,
-     @PathVariable long Drug_id, 
+     @PathVariable String drug_name,
+     @PathVariable String effet, 
      @PathVariable String quantity,
      @PathVariable long medicineQuantity_id,
      @PathVariable long medicineFrequency_id,
@@ -83,7 +81,6 @@ public class MedicineLabelController {
     
 
     Prescription prescription = prescriptionRepository.findById(Prescription_id);
-    Drug drug = drugRepository.findById(Drug_id);
     MedicineQuantity medicineQuantity = medicineQuantityRepository.findById(medicineQuantity_id);
     MedicineFrequency  medicineFrequency = medicineFrequencyRepository.findById(medicineFrequency_id);
     MedicineDuration medicineDuration = medicineDurationRepository.findById(medicineDuration_id); 
@@ -91,7 +88,8 @@ public class MedicineLabelController {
     
     
     newMedicineLabel.setPrescription(prescription);
-    newMedicineLabel.setDrug(drug);
+    newMedicineLabel.setDrug_name(drug_name);
+    newMedicineLabel.setEffet(effet);
     newMedicineLabel.setQuantity(quantity);
     newMedicineLabel.setMedicineQuantity(medicineQuantity);
     newMedicineLabel.setMedicineFrequency(medicineFrequency);

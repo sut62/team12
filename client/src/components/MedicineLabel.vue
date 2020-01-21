@@ -36,10 +36,6 @@
                     </v-text-field>
                     <v-text-field v-model="patientName" label=" ชื่อ-สกุล" disabled>
                     </v-text-field>
-                    <v-text-field v-model="iDdrug" label="รหัสยา" disabled>
-                    </v-text-field>
-                    <v-text-field v-model="N_drug" label="ชื่อยา" disabled>
-                    </v-text-field>
                     <v-text-field v-model="patientamount" label="จำนวนยา" disabled>
                     </v-text-field>
                     <v-text-field v-model="Unit" label="หน่วยของจำนวนยา" disabled>
@@ -52,16 +48,15 @@
             <v-card class="mx-auto" color="white" width="700px" outlined>
                 <v-col md="10">
                     <v-row>
-                        <v-text-field v-model="medicine.drugId" label="ค้นหา ID ยา" :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required>
+                        <v-text-field v-model="N_drug" label="ชื่อยา" disabled>
                         </v-text-field>
-                        <v-btn class="ma-2" small color="primary" dark @click="findDrug">ค้นหา
-                        </v-btn>
-                    </v-row>
-                    <v-text-field v-model="Namedrug" label="ชื่อยา" disabled>
+                         <v-text-field v-model="d_Effet" label="ผลข้างเคียง" disabled>
                     </v-text-field>
+                    </v-row>
+                    
                     <v-row>
-                        <v-col cols="3">
-                            <v-textarea v-model="quantity" auto-grow outlined rows="1" label="ป้อนจำนวน">
+                        <v-col cols="4">
+                            <v-textarea v-model="quantity" auto-grow outlined rows="1" label="ปริมาณการรับประทานยา">
                             </v-textarea>
                         </v-col>
                         <v-select v-model="medicine.medicineQuantityId" :items="medicineQuantitys" item-text="medicineQuantity" item-value="id" label="โปรดเลือกหน่วยการรับประทานยา" :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required>
@@ -72,29 +67,11 @@
                     </v-select>
                     <v-select v-model="medicine.medicineDurationId" :items="medicineDurations" item-text="medicineDuration" item-value="id" label="โปรดเลือกช่วงเวลา" :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required>
                     </v-select>
-
-                    <v-bottom-sheet v-model="sheet">
-                        <template v-slot:activator="{ on }">
-                            <v-row justify="center">
-                                <v-btn color="primary" @click="saveMedicine">บันทึกข้อมูล
-                                </v-btn>
-                            </v-row>
-                        </template>
-                        <v-sheet class="text-center" height="750px">
-                            <div>
-                                <br>
-                                <h2>ข้อมูลฉลากยา</h2>
-                            </div>
-
-                            <div>
-                                รหัสผู้ป่วย : {{patientId}} <br>
-                                ชื่อ-สกุล :{{patientName}}<br>
-                                ชื่อยา : {{Namedrug}}<br>
-                                วิธีใช้ : <br>
-                                คำเตือน : {{drugEffet}}<br>
-                            </div>
-                        </v-sheet>
-                    </v-bottom-sheet>
+                    <v-row justify="center">
+                            <v-btn color="primary" @click="saveMedicine">บันทึกข้อมูล
+                            </v-btn>
+                    </v-row>
+                   
                 </v-col>
             </v-card>
         </v-row>
@@ -127,9 +104,9 @@ export default {
             patientId: "",
             ttname: "",
             patientName: "",
-            iDdrug: "",
-            Unit: "",
             N_drug: "",
+            Unit: "",
+            d_Effet: "",
             patientamount: "",
             patientPrescription_id: "",
             drugEffet: "",
@@ -200,8 +177,8 @@ export default {
                         this.patientId = response.data.patient_ID;
                         this.ttname = response.data.titleName.titlename;
                         this.patientName = response.data.name;
-                        this.iDdrug = response.data.drug.id;
                         this.N_drug = response.data.drug.drugname;
+                        this.d_Effet = response.data.drug.sideeffect;
                         this.patientamount = response.data.amount;
                         this.patientPrescription_id = response.data.Prescription_id;
                         this.Unit = response.data.unit_of_medicine.unit;
@@ -218,27 +195,7 @@ export default {
             this.submitted = true;
         },
 
-        //ค้นหาชื่อยา
-        findDrug() {
-            http
-                .get("/drug/" + this.medicine.drugId)
-                .then(response => {
-                    console.log(response);
-                    if (response.data != null) {
-                        this.Namedrug = response.data.drugname;
-                        this.drugEffet = response.data.sideeffect;
-                        this.drugCheck = response.status;
-                        this.drugFound = false;
-                    } else {
-                        this.clear()
-                        this.drugNotFound = true;
-                    }
-                })
-                .catch(e => {
-                    console.log(e);
-                });
-            this.submitted = true;
-        },
+        
 
         // function เมื่อกดปุ่ม submit
         saveMedicine() {
@@ -247,7 +204,9 @@ export default {
                     "/MedicineLabel/" + this.medicine.prescriptionId +
                     
                     "/" +
-                    this.iDdrug +
+                    this.N_drug +
+                     "/" +
+                    this.d_Effet +
                                        
                     "/" +
                     this.quantity +
