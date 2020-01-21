@@ -7,9 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -32,7 +33,11 @@ public class RecordBill {
     @Column(name = "RecordBill_ID", unique = true, nullable = true)
 
     private @NonNull Long ID;
-    private @NonNull Integer DrugPrice;
+    
+    @NotNull
+    @Max(999999)
+    @Min(1)
+    private Integer DrugPrice;
     private @NonNull Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PaymentChannel.class)
