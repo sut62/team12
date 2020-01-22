@@ -34,5 +34,20 @@ public class DrugCategory {
     @OneToMany(fetch = FetchType.EAGER)
     //mappedBy  = "drugcategory"
     private Collection<Drug> drugcategory;
+
+    
+    public void setCategory(String category){
+        this.category = category;
+    }
+
+    public DrugCategory(String category){
+        this.category = category;
+    }
+
+    public String getCategory(){
+        return category;
+    }
+
+    
 }
 

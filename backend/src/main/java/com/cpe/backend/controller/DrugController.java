@@ -72,14 +72,14 @@ public class DrugController {
 
     
 
-    @PostMapping("/drug/{drugname}/{DrugCategory_id}/{Unit_of_medicine_id}/{how}/{sideeffect}/{price}/{pharmacist_id}")
+    @PostMapping("/drug/{drugname}/{DrugCategory_id}/{Unit_of_medicine_id}/{how}/{SideEffect}/{price}/{pharmacist_id}")
     public Drug newDrug(Drug newDrug,
     @PathVariable String drugname,
     @PathVariable long DrugCategory_id,
     @PathVariable long Unit_of_medicine_id,
     @PathVariable String how,
-    @PathVariable String sideeffect,
-    @PathVariable long price,
+    @PathVariable String SideEffect,
+    @PathVariable Integer price,
     @PathVariable long pharmacist_id) {
 
 
@@ -91,7 +91,7 @@ public class DrugController {
     newDrug.setCategory(category);
     newDrug.setUnit_of_medicine(unit);
     newDrug.setHow(how);
-    newDrug.setSideeffect(sideeffect);
+    newDrug.setSideEffect(SideEffect);
     newDrug.setPrice(price);  
     newDrug.setPharmacist(pharmacist); 
 
