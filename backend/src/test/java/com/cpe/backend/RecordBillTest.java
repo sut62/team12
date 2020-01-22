@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
-public class RecordBillTest{
+public class RecordBillTest {
 
     private Validator validator;
     @Autowired
@@ -50,6 +50,7 @@ public class RecordBillTest{
         final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         factory.getValidator();
     }
+
     @Test
     void B5903900_testRecordBillComplete() {
         RecordBill recordBill = new RecordBill();
@@ -89,7 +90,7 @@ public class RecordBillTest{
             assertEquals("drugPrice", message.getPropertyPath().toString());
         }
     }
-    
+
     @Test
     void B5903900_testDrugPriceMoreThanZero() { // ใส่ข้อมูลปกติ
         RecordBill recordBill = new RecordBill();
@@ -108,7 +109,7 @@ public class RecordBillTest{
             assertEquals("drugPrice", v.getPropertyPath().toString());
         }
     }
-    
+
     @Test
     void B5903900_testDrugPriceEqualZero() { // ใส่ข้อมูลปกติ
         RecordBill recordBill = new RecordBill();
@@ -125,6 +126,60 @@ public class RecordBillTest{
             ConstraintViolation<RecordBill> v = result.iterator().next();
             assertEquals("must be equal Zero", v.getMessage());
             assertEquals("drugPrice", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5903900_testPaymentChannelNotNull() { // ใส่ข้อมูลปกติ
+        RecordBill recordBill = new RecordBill();
+        try {
+            recordBill.setPaymentChannel(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<RecordBill>> result = validator.validate(recordBill);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<RecordBill> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("paymentChannel", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5903900_testMedicalRightNotNull() { // ใส่ข้อมูลปกติ
+        RecordBill recordBill = new RecordBill();
+        try {
+            recordBill.setMedicalRight(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<RecordBill>> result = validator.validate(recordBill);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<RecordBill> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("medicalRight", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5903900_testCashierNotNull() { // ใส่ข้อมูลปกติ
+        RecordBill recordBill = new RecordBill();
+        try {
+            recordBill.setCashier(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<RecordBill>> result = validator.validate(recordBill);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<RecordBill> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("paymentChannel", v.getPropertyPath().toString());
         }
     }
 
