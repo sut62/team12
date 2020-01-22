@@ -74,7 +74,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testRecieve_nameMustNotBeNull(){
         DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(1);
+        
         try{
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
+            drugdispense.setTitlePharmacist(titlepharmacist);
+            drugdispense.setPharmacist(pharmacist);
             drugdispense.setReciever_name(null);
         }
         catch(ConstraintViolationException e){
@@ -92,15 +99,25 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testRecieverNameMustBeUnique(){
         DrugDispense d1 = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(1);
         
         try{
-            d1.setReciever_name("ประวีร์ ยุทธวีระวงศ์"); 
+            d1.setDrugdispensechannel(drugdispensechannel);
+            d1.setTitlePharmacist(titlepharmacist);
+            d1.setPharmacist(pharmacist);
+            d1.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
             drugdispenseRepository.saveAndFlush(d1);            
         }
         catch(DataIntegrityViolationException e){
             // คาดหวังว่า DataIntegrityViolationException จะถูก throw
             assertThrows(DataIntegrityViolationException.class, () -> {
                 DrugDispense d2 = new DrugDispense();
+                
+                d2.setDrugdispensechannel(drugdispensechannel);
+                d2.setTitlePharmacist(titlepharmacist);
+                d2.setPharmacist(pharmacist);
                 d2.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
                 drugdispenseRepository.saveAndFlush(d2);               
             });
@@ -111,8 +128,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testRecieverNameNotLessThan2(){
         DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(1);
         
         try{
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
+            drugdispense.setTitlePharmacist(titlepharmacist);
+            drugdispense.setPharmacist(pharmacist);
             drugdispense.setReciever_name("ก");
         }
         catch(ConstraintViolationException e){
@@ -129,8 +152,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testRecieverNameNotMoreThan30(){
         DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(1);
         
         try{
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
+            drugdispense.setTitlePharmacist(titlepharmacist);
+            drugdispense.setPharmacist(pharmacist);
             drugdispense.setReciever_name("กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก");
         }
         catch(ConstraintViolationException e){
@@ -141,6 +170,60 @@ public class DrugDispenseTest {
             ConstraintViolation<DrugDispense> v = result.iterator().next();
             assertEquals("size must be between 2 and 30", v.getMessage());
             assertEquals("reciever_name", v.getPropertyPath().toString());
+        }
+    }
+    
+    @Test
+    void B5915477_testDrugDispenseChannelMustNotBeNull() { // ใส่ข้อมูลปกติ
+        DrugDispense drugdispense = new DrugDispense();
+        try {
+            drugdispense.setDrugdispensechannel(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<DrugDispense> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("drugdispenseChannel", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5915477_testTitlePharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
+        DrugDispense drugdispense = new DrugDispense();
+        try {
+            drugdispense.setTitlePharmacist(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<DrugDispense> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("titlepharmacist", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5915477_testPharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
+        DrugDispense drugdispense = new DrugDispense();
+        try {
+            drugdispense.setPharmacist(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<DrugDispense> v = result.iterator().next();
+            assertEquals("must be not null", v.getMessage());
+            assertEquals("pharmacist", v.getPropertyPath().toString());
         }
     }
 
