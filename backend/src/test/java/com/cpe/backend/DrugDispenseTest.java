@@ -54,7 +54,7 @@ public class DrugDispenseTest {
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(1);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
         
         drugdispense.setDrugdispensechannel(drugdispensechannel);
         drugdispense.setTitlePharmacist(titlepharmacist);
@@ -76,7 +76,7 @@ public class DrugDispenseTest {
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(1);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
         
         try{
             drugdispense.setDrugdispensechannel(drugdispensechannel);
@@ -101,7 +101,7 @@ public class DrugDispenseTest {
         DrugDispense d1 = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(1);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
         
         try{
             d1.setDrugdispensechannel(drugdispensechannel);
@@ -130,7 +130,7 @@ public class DrugDispenseTest {
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(1);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
         
         try{
             drugdispense.setDrugdispensechannel(drugdispensechannel);
@@ -154,8 +154,8 @@ public class DrugDispenseTest {
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(1);
-        
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
+    
         try{
             drugdispense.setDrugdispensechannel(drugdispensechannel);
             drugdispense.setTitlePharmacist(titlepharmacist);
@@ -176,8 +176,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testDrugDispenseChannelMustNotBeNull() { // ใส่ข้อมูลปกติ
         DrugDispense drugdispense = new DrugDispense();
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
+
         try {
             drugdispense.setDrugdispensechannel(null);
+            drugdispense.setTitlePharmacist(titlepharmacist);
+            drugdispense.setPharmacist(pharmacist);
+            drugdispense.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
 
@@ -194,8 +200,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testTitlePharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
         DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
+
         try {
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
             drugdispense.setTitlePharmacist(null);
+            drugdispense.setPharmacist(pharmacist);
+            drugdispense.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
 
@@ -212,8 +224,14 @@ public class DrugDispenseTest {
     @Test
     void B5915477_testPharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
         DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+
         try {
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
+            drugdispense.setTitlePharmacist(titlepharmacist);
             drugdispense.setPharmacist(null);
+            drugdispense.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
 
