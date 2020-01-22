@@ -15,8 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.validation.constraints.NotNull;
 
-
+import java.util.Date;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Data
 @Entity //เป็นการประกาศว่า java class นี้เป็น entity class เพื่อให้ framework มาอ่านข้อมูลของ class นี้ไปสร้างเป็น table
@@ -31,10 +38,15 @@ public class MedicineLabel{
   //@TableGenerator เป็นการระบุว่าให้ database ทำการสร้าง id หรือ primary key ให้เองโดยอัตโนมัติ โดย ให้ squence id นั้นเก็บไว้ที่ table MedicineLabel_SEQ  ที่มีค่าของ column NAME เท่ากับ Schedule 
   @SequenceGenerator(name = "MEDICINELABEL_SEQ", sequenceName = "MEDICINELABEL_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEDICINELABEL_SEQ")
+  
   @Column(name = "MEDICINELABEL_ID", unique = true, nullable = true)  //กำหนดให้ column นี้มีชื่อว่า MedicineLabel_ID ถ้าไม่กำหนดมันจะเป็น ID ให้เองโดยอัตโนมัติ
-
   private @NonNull Long id;
-  private @NonNull String quantity;
+  
+  @NotNull
+  @Min(1)
+   @Max(3)
+  private Integer quantity;
+
   private @NonNull String drug_name;
   private @NonNull String effet;
 

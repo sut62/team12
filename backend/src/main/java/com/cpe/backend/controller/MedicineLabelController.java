@@ -71,7 +71,7 @@ public class MedicineLabelController {
      @PathVariable long Prescription_id,
      @PathVariable String drug_name,
      @PathVariable String effet, 
-     @PathVariable String quantity,
+     @PathVariable Integer quantity,
      @PathVariable long medicineQuantity_id,
      @PathVariable long medicineFrequency_id,
      @PathVariable long medicineDuration_id)
