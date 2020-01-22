@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -15,11 +14,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
+import lombok.Data;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import lombok.NoArgsConstructor;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 @Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -30,13 +33,24 @@ public class Prescription {
     @SequenceGenerator(name = "Prescription_SEQ", sequenceName = "Prescription_SEQ", initialValue=120000)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prescription_SEQ")
     @Column(name = "Prescription_ID", unique = true, nullable = true)
-
     private @NonNull Long id;
-    private @NonNull String patient_ID;
-    private @NonNull String name;
-    private @NonNull Integer age;
-    private @NonNull String drugallergy;
-    private @NonNull Integer amount;
+
+    @Pattern(regexp = "HN\\d{8}")
+    private @NotNull String patient_ID;
+    
+    @Size(max=50,min=5)
+    private @NotNull String name;
+
+    @Min(1)
+    @Max(122)
+    private @NotNull Integer age;
+
+    @Pattern(regexp = "[a-z]*")
+    private @NotNull String drugallergy;
+
+    @Min(1)
+    @Max(100)
+    private @NotNull Integer amount;
     private @NonNull Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitleName.class)
@@ -54,4 +68,5 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Drug.class)
     @JoinColumn(name = "Drug_ID", insertable = true)
     private Drug drug;
+
 }
