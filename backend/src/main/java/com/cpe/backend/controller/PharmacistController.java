@@ -56,7 +56,6 @@ public class PharmacistController {
         return pharmacistRepository.findAll().stream().collect(Collectors.toList());
     }
 
-
     @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{birthday}/{age}/{province_id}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
     @PathVariable long id_card,
@@ -67,7 +66,7 @@ public class PharmacistController {
     @PathVariable Date birthday,
     @PathVariable Integer age,
     @PathVariable String address,
-    @PathVariable Integer phone,
+    @PathVariable String phone,
     @PathVariable String mail ) {
 
     Province province = provinceRepository.findById(province_id);
