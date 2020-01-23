@@ -87,7 +87,7 @@ public class Pharmacist {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sex.class)
     @JoinColumn(name = "Sex_ID",insertable = true)
-    private Sex S
+    private Sex sex ;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitlePharmacist.class)
     @JoinColumn(name = "TitlePharmacist_ID",insertable = true)
