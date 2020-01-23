@@ -8,6 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import java.sql.Date;
 
 import javax.persistence.GeneratedValue;
@@ -36,12 +43,41 @@ public class Pharmacist {
     
     //กำหนดตัวแปร
     private @NonNull Long id;
+    
+    @NotNull
+    @Pattern(regexp = "\\d{13}")
+    @Column(name = "ID_CARD")
     private @NonNull Long id_card;
+
+    @NotNull
+    @Size(max=50,min=5)
+    @Column(name = "NAME")
     private @NonNull String name;
+    
+    @Pattern(regexp = "\\d{10}")
+    @NotNull
+    @Column(name = "BIRTHDAY")
     private @NonNull Date birthday;
+
+    @NotNull
+    @Min(1)
+    @Max(125)
+    @Column(name = "AGE")
     private @NonNull Integer age;
+
+    @NotNull
+    @Size(max=100,min=5)
+    @Column(name = "ADDRESS")
     private @NonNull String address;
-    private @NonNull Integer phone;
+
+    @NotNull
+    @Pattern(regexp = "\\d{10}")
+    @Column(name = "PHONE")
+    private @NonNull String phone;
+
+    @Size(max=50,min=5)
+    @NotNull
+    @Column(name = "MAIL")
     private @NonNull String mail;
 
 
@@ -51,13 +87,12 @@ public class Pharmacist {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sex.class)
     @JoinColumn(name = "Sex_ID",insertable = true)
-    private Sex Sex;
+    private Sex S
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitlePharmacist.class)
     @JoinColumn(name = "TitlePharmacist_ID",insertable = true)
     private TitlePharmacist TitlePharmacist ;
 
     
-
 
 }
