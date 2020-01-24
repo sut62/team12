@@ -6,6 +6,7 @@ import RecordBill from '../components/RecordBill';
 import Drug from '../components/Drug';
 import DrugDispense from '../components/DrugDispense';
 import Pharmacist from '../components/Pharmacist';
+import ViewDrug from '../components/ViewDrug';
 Vue.use(Router);
 
 
@@ -37,6 +38,12 @@ export default new Router({
             path: '/pharmacist',
             component: Pharmacist
         },
+        {
+            path: '/viewdrug',
+            component: ViewDrug
+        },
+
+
     ]
     
 });
