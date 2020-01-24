@@ -34,10 +34,10 @@ public class Drug {
     @Size(max=30,min=3)
     private @NonNull String drugname;
 
-    @Size(max=100,min=1)
+    @Size(max=100,min=2)
     private @NonNull String how;
 
-    @Size(max=200,min=1)
+    @Size(max=200,min=2)
     private @NonNull String sef;
     
     @NotNull
