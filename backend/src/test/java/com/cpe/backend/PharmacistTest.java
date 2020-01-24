@@ -812,4 +812,58 @@ public class PharmacistTest {
 
 }
 
+@Test
+    void B5903900_testTitlePharmacistNotNull() { // ใส่ข้อมูลปกติ
+        Pharmacist pharmacist = new Pharmacist();
+        try {
+            pharmacist.setTitlePharmacist(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharmacist);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<Pharmacist> message = result.iterator().next();
+            assertEquals("must be not null", message.getMessage());
+            assertEquals("TitlePharmacist", message.getPropertyPath().toString());
+        }
+    }
+
+
+    @Test
+    void B5903900_testSexNotNull() { // ใส่ข้อมูลปกติ
+        Pharmacist pharmacist = new Pharmacist();
+        try {
+            pharmacist.setSex(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharmacist);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<Pharmacist> message = result.iterator().next();
+            assertEquals("must be not null", message.getMessage());
+            assertEquals("Sex", message.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5903900_testProviceNotNull() { // ใส่ข้อมูลปกติ
+        Pharmacist pharmacist = new Pharmacist();
+        try {
+            pharmacist.setProvince(null);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharmacist);
+
+            // result ต้องมี error 1 ค่าเท่านั้น
+            assertEquals(1, result.size());
+
+            // error message ตรงชนิด และถูก field
+            ConstraintViolation<Pharmacist> message = result.iterator().next();
+            assertEquals("must be not null", message.getMessage());
+            assertEquals("Province", message.getPropertyPath().toString());
+        }
+    }
 }
