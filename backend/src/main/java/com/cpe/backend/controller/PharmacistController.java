@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
@@ -58,7 +57,7 @@ public class PharmacistController {
 
     @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{birthday}/{age}/{province_id}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
-    @PathVariable long id_card,
+    @PathVariable String id_card,
     @PathVariable long province_id,
     @PathVariable long sex_id,
     @PathVariable long titlepharmacist_id,

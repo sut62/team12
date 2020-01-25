@@ -2,6 +2,8 @@
 package com.cpe.backend.Entity;
 
 import lombok.*; //ช่วยให้เขียนโค๊ดได้ง่ายขึ้น
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,8 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,7 +23,6 @@ import java.sql.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,42 +45,36 @@ public class Pharmacist {
     @Column(name = "Pharmacist_ID", unique = true, nullable = true)   //กำหนดให้ column นี้มีชื่อว่า Pharmacist_ID ถ้าไม่กำหนดมันจะเป็น ID ให้เองโดยอัตโนมัติ
     
     //กำหนดตัวแปร
-    private @NonNull Long id;
-    
     @NotNull
-    @Pattern(regexp = "\\d{13}")
-    @Column(name = "ID_CARD")
-    private @NonNull Long id_card;
+    private @NonNull Long id;
 
     @NotNull
-    @Size(max=50,min=5)
-    @Column(name = "NAME")
-    private @NonNull String name;
+    @Size( max = 13,min = 13)
+    private @NonNull String id_card;
     
-    @Pattern(regexp = "\\d{10}")
     @NotNull
-    @Column(name = "BIRTHDAY")
+    @Size( max = 50,min = 5)
+    private @NonNull String name;
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private @NonNull Date birthday;
 
     @NotNull
     @Min(1)
     @Max(125)
-    @Column(name = "AGE")
     private @NonNull Integer age;
 
     @NotNull
-    @Size(max=100,min=5)
-    @Column(name = "ADDRESS")
+    @Size( max = 100,min = 5)
     private @NonNull String address;
 
     @NotNull
-    @Pattern(regexp = "\\d{10}")
-    @Column(name = "PHONE")
+    @Size( max = 10,min = 10)
     private @NonNull String phone;
 
-    @Size(max=50,min=5)
     @NotNull
-    @Column(name = "MAIL")
+    @Size( max = 50,min = 5)
     private @NonNull String mail;
 
 
@@ -87,12 +84,13 @@ public class Pharmacist {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sex.class)
     @JoinColumn(name = "Sex_ID",insertable = true)
-    private Sex sex ;
+    private Sex Sex;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TitlePharmacist.class)
-    @JoinColumn(name = "TitlePharmacist_ID",insertable = true)
+    @JoinColumn(name = "TitlePharmacist",insertable = true)
     private TitlePharmacist TitlePharmacist ;
 
     
+
 
 }
