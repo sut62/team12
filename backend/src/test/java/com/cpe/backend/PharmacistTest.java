@@ -14,9 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.core.Constants.ConstantException;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import ch.qos.logback.core.util.DatePatternToRegexUtil;
 
@@ -26,8 +23,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.sql.Date;
 import java.util.Optional;
 import java.util.Set;
