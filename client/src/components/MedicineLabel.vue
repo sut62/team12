@@ -7,17 +7,10 @@
     <div v-if="orderNotFound">
         <v-alert dense outlined type="error">
             <strong>ไม่พบข้อมูลใบสั่งยา</strong>กรุณากรอกข้อมูลอีกครั้ง
-        </v-alert>
+        </v-alert>  
     </div>
-    <div v-if="saveUSC">
-        <v-alert outlined dense text type="warning" prominent border="left">
-            <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
-        </v-alert>
-    </div>
-    <div v-if="saveSC">
-        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
-        </v-alert>
-    </div>
+
+    
 
     <v-row>
         <v-col md="4">
@@ -67,15 +60,64 @@
                     </v-select>
                     <v-select v-model="medicine.medicineDurationId" :items="medicineDurations" item-text="medicineDuration" item-value="id" label="โปรดเลือกช่วงเวลา" :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required>
                     </v-select>
-                    <v-row justify="center">
-                            <v-btn color="primary" @click="saveMedicine">บันทึกข้อมูล
-                            </v-btn>
-                    </v-row>
+                   <v-bottom-sheet v-model="sheet">
+                       <template v-slot:activator="{ on }">
+                         <v-btn  color="primary" dark v-on="on" @click="saveMedicine">บันทึก</v-btn>                      
+                        </template>
+                       <v-sheet class="text-center" height="750px">
+                        <v-container>
+                            <div v-if="saveUSC">
+                                <v-alert outlined dense text type="warning" prominent border="left">
+                                    <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
+                                </v-alert>
+                            </div>
+                            <div v-if="saveSC">
+                                    <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
+                                </v-alert>
+                            </div>
+                            <h1 justify="center">ข้อมูลฉลากยา</h1><br>
+                            <v-row >
+                                <v-col >
+                                    <p class="text-left"> 
+                                        {{patientId}}
+                                    </p><br>
+                                    <p class="text-left"> 
+                                        ชื่อ-สกุล:{{patientName}}
+                                    </p><br>
+                                    <p class="text-left"> 
+                                        ชื่อยา:{{N_drug}}
+                                    </p><br>
+                                    <p class="text-left"> 
+                                        รับประทานครั้งละ {{quantity}} 
+                                        {{medicine.m_quantity}} 
+                                        วันละ {{medicine.Frequency}}
+                                    </p><br>
+                                    <p class="text-left"> 
+                                        {{medicine.m_duration}}
+                                    </p><br>
+                                    <p class="text-left"> 
+                                        ผลข้างเคียง :{{d_Effet}}
+                                    </p><br>
+                                </v-col>
+                                <v-col md = 6><br><br>
+                                   จำนวน: {{patientamount}} {{Unit}}
+                                </v-col>
+                        
+
+                                
+                            </v-row> 
+                            <v-row justify="center">
+                                 <v-btn  color="primary" dark  >พิมพ์</v-btn>
+                            </v-row>
+                        </v-container>
+                       </v-sheet>
+                   </v-bottom-sheet>
                    
                 </v-col>
             </v-card>
         </v-row>
-
+    
+    
     </v-row>
 </v-container>
 </template>
@@ -87,11 +129,16 @@ export default {
     data() {
         return {
             medicine: {
+                
                 medicineQuantityId: "",
                 medicineFrequencyId: "",
                 medicineDurationId: "",
                 prescriptionId: "",
                 drugId: "",
+                Frequency:"",
+                m_quantity:"",
+                m_duration:"",
+              
 
                 //คลาสที่เอามาเก็บตัวแปร
 
@@ -111,8 +158,8 @@ export default {
             patientPrescription_id: "",
             drugEffet: "",
             quantity: "",
-            Namedrug: "",
             orderNotFound: false,
+            newFrequencys:"",
 
             drugCheck: false,
 
@@ -127,6 +174,47 @@ export default {
 
     methods: {
         /* eslint-disable no-console */
+        findFrequency () {
+            http
+                .get("/frequency/" + this.medicine.medicineFrequencyId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.medicine.Frequency = response.data.medicineFrequency;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        findQuantity () {
+            http
+                .get("/quantity/" + this.medicine.medicineQuantityId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.medicine.m_quantity = response.data.medicineQuantity;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        findDuration () {
+            http
+                .get("/duration/" + this.medicine.medicineDurationId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.medicine.m_duration = response.data.medicineDuration;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
 
         // ดึงข้อมูล Room ใส่ combobox
         getMedicineDurations() {
@@ -166,7 +254,18 @@ export default {
                     console.log(e);
                 });
         },
-
+        getMedicineLabel() {
+            http
+                .get("/MedicineLabel")
+                .then(response => {
+                    this.medicineLabels = response.data;
+                    console.log(this.medicineLabels);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+        
         // ค้นหารหัสใบสั่งยา
         findPrescription() {
             http
@@ -178,14 +277,13 @@ export default {
                         this.ttname = response.data.titleName.titlename;
                         this.patientName = response.data.name;
                         this.N_drug = response.data.drug.drugname;
-                        this.d_Effet = response.data.drug.sideeffect;
+                        this.d_Effet = response.data.drug.sef;
                         this.patientamount = response.data.amount;
                         this.patientPrescription_id = response.data.Prescription_id;
                         this.Unit = response.data.unit_of_medicine.unit;
                         this.orderCheck = response.status;
                         this.orderNotFound = false;
                     } else {
-                        
                         this.OrderNotFound = true;
                     }
                 })
@@ -222,6 +320,9 @@ export default {
                     console.log(response);
                     this.saveUSC = false;
                     this.saveSC = true;
+                    this.findFrequency();
+                    this.findQuantity();
+                    this.findDuration ();
                 })
 
                 .catch(e => {
@@ -234,11 +335,13 @@ export default {
 
         /* eslint-enable no-console */
     },
+    
     mounted() {
-
+        
         this.getMedicineFrequencys();
         this.getMedicineQuantitys();
         this.getMedicineDurations();
+        this.getMedicineLabel();
     }
 
 };
