@@ -96,7 +96,7 @@ public class RecordBillTest {
         RecordBill recordBill = new RecordBill();
 
         try {
-            recordBill.setDrugPrice(123);
+            recordBill.setDrugPrice(1000000);         
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<RecordBill>> result = validator.validate(recordBill);
 
@@ -115,7 +115,7 @@ public class RecordBillTest {
         RecordBill recordBill = new RecordBill();
 
         try {
-            recordBill.setDrugPrice(0);
+            recordBill.setDrugPrice(0);          
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<RecordBill>> result = validator.validate(recordBill);
 
@@ -124,7 +124,7 @@ public class RecordBillTest {
 
             // error message ตรงชนิด และถูก field
             ConstraintViolation<RecordBill> v = result.iterator().next();
-            assertEquals("must be equal Zero", v.getMessage());
+            assertEquals("must not be equal Zero", v.getMessage());
             assertEquals("drugPrice", v.getPropertyPath().toString());
         }
     }
