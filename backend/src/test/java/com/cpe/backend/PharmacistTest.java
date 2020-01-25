@@ -62,7 +62,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1997-10-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -75,7 +75,7 @@ public class PharmacistTest {
     } catch (UnexpectedTypeException e){
      pharm = pharmacistRepository.saveAndFlush(pharm);
         Optional<Pharmacist> check = pharmacistRepository.findById(pharm.getId());
-        assertEquals(1234567890123l, check.get().getId_card());
+        assertEquals("1234567890123", check.get().getId_card());
         assertEquals("ขขขขขข", check.get().getName());
         assertEquals(33, check.get().getAge());
         assertEquals(birthday, check.get().getBirthday());
@@ -99,7 +99,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(123456789012l);
+    try { pharm.setId_card("123456789012");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -132,7 +132,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(12345678901234l);
+    try { pharm.setId_card("12345678901234");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -201,7 +201,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -236,7 +236,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -270,7 +270,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -304,7 +304,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -338,7 +338,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -371,7 +371,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -406,7 +406,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -441,7 +441,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -475,7 +475,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -509,7 +509,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -544,7 +544,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -578,7 +578,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -612,7 +612,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -646,7 +646,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -681,7 +681,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -715,7 +715,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card(1234567890123l);
+    try {try{ pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -750,7 +750,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(1111-11-111);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
@@ -784,7 +784,7 @@ public class PharmacistTest {
     java.sql.Date birthday = new java.sql.Date(111-11-11);
 
     Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card(1234567890123l);
+    try { pharm.setId_card("1234567890123");
     pharm.setProvince(province);
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
