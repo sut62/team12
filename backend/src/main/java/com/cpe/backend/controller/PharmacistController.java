@@ -55,6 +55,12 @@ public class PharmacistController {
         return pharmacistRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/pharmacist/{id}")
+    public  Optional <Pharmacist> Pharmacists(@PathVariable Long id){
+            Optional<Pharmacist> pharmacist = pharmacistRepository.findById(id);
+            return pharmacist;
+    }
+
     @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{birthday}/{age}/{province_id}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
     @PathVariable String id_card,
