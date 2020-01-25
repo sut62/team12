@@ -7,17 +7,6 @@
         </v-alert>
     </div>
 
-    <div v-if="saveUSC">
-        <v-alert outlined dense text type="warning" prominent border="left">
-            <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
-        </v-alert>
-    </div>
-
-    <div v-if="saveSC">
-        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
-        </v-alert>
-    </div>
-
     <div class="text-center">
         <h1 class="display-2" text--left>ระบบจ่ายยา</h1>
     </div><br><br>
@@ -78,7 +67,7 @@
                 <!-- field ชื่อผู้รับยา -->
                 <v-col cols="12" md="9">
                     <v-text-field 
-                        v-model="DrugDispense.reciever_name" label="ชื่อผู้รับยา"
+                        v-model="DrugDispense.reciever_name" label="ชื่อ-สกุล(ผู้รับยา)"
                     ></v-text-field>
                 </v-col>
                 <!------------------>
@@ -86,11 +75,95 @@
             </v-card>
             <br />
 
-            <!-- ปุ่ม SAVE -->
-            <div class="text-center">
-                <v-btn rounded @click="saveDrugDispenses" dark>SAVE</v-btn>
+            
+            <div class="text-center">                
+                <v-bottom-sheet v-model="sheet">
+                    <!-- ปุ่ม บันทึก -->
+                    <template v-slot:activator="{ on }">
+                        <v-btn rounded v-on="on" @click="saveDrugDispenses" dark>บันทึก</v-btn>
+                    </template>
+                    <!------------->
+                    <v-sheet class="text-center" height="750px">
+                        <v-container>
+                            <div v-if="saveUSC">
+                                <v-alert outlined dense text type="warning" prominent border="left">
+                                    <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
+                                </v-alert>
+                            </div>
+
+                            <div v-if="saveSC">
+                                <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
+                                </v-alert>
+                            </div>
+                        </v-container>
+                        
+                        <!-- รายละเอียดใบจ่ายยา -->
+                        <div id="printMe">
+                            <v-container>
+                                <v-row justify="center">
+                                <v-col justify="center" cols="6">
+                                <v-form v-model="valid" ref="form" >
+                                
+                                <h1>รายละเอียดใบจ่ายยา</h1>
+
+                                <v-row>
+                                    <v-col cols="4">
+                                        <p class="text-left"><strong>รหัสผู้ป่วย :</strong> {{patientId}} </p> 
+                                    </v-col>
+                                </v-row>
+
+                                <v-row>    
+                                    <v-col cols="8">
+                                        <p class="text-left"><strong>ชื่อ-สกุล(ผู้ป่วย) :</strong> {{titlename}}{{patientName}} </p> 
+                                    </v-col>
+                                </v-row>                                
+
+                                <v-row>
+                                    <v-col cols="4">
+                                        <p class="text-left"><strong>รหัสยา :</strong> {{iDdrug}} </p> 
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <p class="text-left"><strong>ชื่อยา :</strong> {{N_drug}} </p> 
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <p class="text-left"><strong>จำนวนยา :</strong> {{drugamount}} {{Unit}} </p> 
+                                    </v-col>
+                                </v-row> 
+
+                                <v-row>
+                                    <v-col cols="5">
+                                        <p class="text-left"><strong>ช่องรับยา :</strong> {{DrugDispense.channels}} </p>
+                                    </v-col>
+                                </v-row>
+
+                                <v-row>
+                                    <v-col cols="10">
+                                        <p class="text-left"><strong>ชื่อ-สกุล(เภสัชกร) :</strong> {{DrugDispense.n_titlepharmacist}} {{DrugDispense.n_pharmacist}} </p>
+                                    </v-col>
+                                </v-row>
+
+                                <v-row>
+                                    <v-col cols="10">
+                                        <p class="text-left"><strong>ชื่อ-สกุล(ผู้รับยา) :</strong> {{DrugDispense.reciever_name}} </p>
+                                    </v-col>
+                                </v-row>                            
+                                <!------------------------------------------>
+
+                                <!-- ปุ่ม พิมพ์ -->
+                                <v-btn rounded  @click="printDrugDispense" dark>พิมพ์</v-btn>
+                                <!------------->
+
+                                </v-form>
+                                </v-col>
+                                </v-row>
+                            </v-container>
+                        </div>
+
+                    </v-sheet>                
+                </v-bottom-sheet>
             </div>
-            <!------------->
+            
+            
         </v-col>
 
         <!-- แสดงผลการ Search -->
@@ -112,6 +185,7 @@
             </v-text-field>
         </v-col>
         <!----------->
+     
 
     </v-row>
 </v-container>
@@ -119,6 +193,10 @@
 
 <script>
 import http from "../http-common";
+import Vue from 'vue';
+import VueHtmlToPaper from 'vue-html-to-paper'
+ 
+Vue.use(VueHtmlToPaper);
 
 export default {
     name: "DrugDispense",
@@ -130,6 +208,10 @@ export default {
                 pharmacistId: "",
                 prescriptionId: "",
                 reciever_name:"",
+                channels:"",
+                n_titlepharmacist:"",
+                n_pharmacist:"",
+                
             },
             items: [],
             drugdispensechannels: [],
@@ -139,6 +221,8 @@ export default {
             saveUSC: false,
             orderNotFound: false,
             orderCheck: false,
+            sheet: false,
+            valid: false,
 
             patientId: "",
             titlename: "",
@@ -147,11 +231,13 @@ export default {
             iDdrug: "",
             N_drug: "",
             drugamount: "",
-
         };
     },
     methods: {
         /* eslint-disable no-console */
+        print() {
+            this.$htmlToPaper('printMe');
+        },
 
         // ดึงข้อมูล DrugDispenseChannel ใส่ combobox
         getDrugDispenseChannels() {
@@ -219,6 +305,48 @@ export default {
             this.submitted = true;
         },
 
+        findDrugDispenseChannel(){
+            http
+                .get("/drugdispensechannel/" + this.DrugDispense.drugdispensechannelId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.DrugDispense.channels = response.data.drugdispensechannel;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        findTitlePharmacist(){
+            http
+                .get("/titlepharmacist/" + this.DrugDispense.titlepharmacistId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.DrugDispense.n_titlepharmacist = response.data.titlepharmacist;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        findPharmacistName(){
+            http
+                .get("/pharmacist/" + this.DrugDispense.pharmacistId)
+                .then(response => {
+                    console.log(response);
+                    if (response.data != null) {
+                        this.DrugDispense.n_pharmacist = response.data.name;
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
         // function เมื่อกดปุ่ม save
         saveDrugDispenses() {
             http
@@ -234,6 +362,9 @@ export default {
                     console.log(response);
                     this.saveSC = true;
                     this.saveUSC = false;
+                    this.findDrugDispenseChannel();
+                    this.findTitlePharmacist();
+                    this.findPharmacistName();
                 })
                 .catch(e => {
                     console.log(e);
@@ -241,7 +372,14 @@ export default {
                     this.saveUSC = true;
                 });
             this.submitted = true;
-        }
+        },
+
+        printDrugDispense(){
+            if(this.saveSC==true){
+                this.print(); 
+            }
+                   
+        },
 
         /* eslint-enable no-console */
     },
@@ -250,6 +388,6 @@ export default {
         this.getDrugDispenseChannels();
         this.getPharmacists();
         this.getTitlePharmacists();
-    }
+    }   
 };
 </script>
