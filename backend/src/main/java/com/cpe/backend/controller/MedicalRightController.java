@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -25,6 +27,12 @@ public class MedicalRightController {
     @GetMapping("/medicalRight")
     public Collection<MedicalRight> medicalRights() {
         return medicalRightRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/medicalRight/{id}")
+    public Optional<MedicalRight> MedicalRights(@PathVariable Long id) {
+        Optional<MedicalRight> medicalright = medicalRightRepository.findById(id);
+        return medicalright;
     }
 
 }

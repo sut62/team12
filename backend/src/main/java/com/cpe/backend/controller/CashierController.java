@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -27,4 +29,10 @@ public class CashierController {
         return cashierRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/cashier/{id}")
+    public Optional<Cashier> cashierss(@PathVariable Long id) {
+        Optional<Cashier> cashier = cashierRepository.findById(id);
+        return cashier;
+
+    }
 }

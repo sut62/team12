@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -25,6 +27,12 @@ public class PaymentChannelController {
     @GetMapping("/paymentChannel")
     public Collection<PaymentChannel> paymentChannels() {
         return paymentChannelRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/paymentChannel/{id}")
+    public Optional<PaymentChannel> PaymentChannelss(@PathVariable Long id) {
+        Optional<PaymentChannel> paymentchannel = paymentChannelRepository.findById(id);
+        return paymentchannel;
     }
 
 }
