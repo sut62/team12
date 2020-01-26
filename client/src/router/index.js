@@ -7,6 +7,7 @@ import Drug from '../components/Drug';
 import DrugDispense from '../components/DrugDispense';
 import Pharmacist from '../components/Pharmacist';
 import ViewDrug from '../components/ViewDrug';
+import ViewPharmacist from '../components/ViewPharmacist';
 Vue.use(Router);
 
 
@@ -42,7 +43,10 @@ export default new Router({
             path: '/viewdrug',
             component: ViewDrug
         },
-
+        {
+            path: '/viewpharmacist',
+            component: ViewPharmacist
+        },
 
     ]
     
