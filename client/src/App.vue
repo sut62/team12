@@ -12,8 +12,7 @@
 
       
       <v-btn @click="gohome" text href="#" target="_blank">
-        <v-icon left>home</v-icon> 
-        <span>หน้าแรก</span>
+        <span>ออกจากระบบ</span>
       </v-btn>
 
 
@@ -39,7 +38,7 @@ export default {
   },
   methods: {
     gohome(){
-      this.$router.push('/home');
+      this.$router.push('/login');
     }
   }
 }
