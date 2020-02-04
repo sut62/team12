@@ -10,6 +10,7 @@ import ViewDrug from '../components/ViewDrug';
 import ViewPharmacist from '../components/ViewPharmacist';
 import Login from '../components/Login';
 import Home from '../components/Home';
+import Home_hr from '../components/Home_hr';
 Vue.use(Router);
 
 
@@ -60,6 +61,10 @@ export default new Router({
         {
             path: '/viewpharmacist',
             component: ViewPharmacist
+        },
+        {
+            path: '/home_hr',
+            component: Home_hr
         },
 
     ]

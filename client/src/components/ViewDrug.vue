@@ -19,10 +19,9 @@
     <v-row justify="center">
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
+
           <v-row justify="center">
             <v-col cols="10">
-
-
               <v-text-field
                 outlined
                 label="กรอกชื่อยา"
@@ -30,8 +29,8 @@
                 :rules="[(v) => !!v || 'Item is required']"
                 required
               ></v-text-field>
-
             </v-col>
+
             <v-col cols="2">
               <div class="my-2">
                 <v-btn @click="findDrug" depressed large color="primary">ค้นหา</v-btn>
@@ -40,6 +39,12 @@
           </v-row>
 
           <div v-if="drugCheck">
+
+            <v-row justify="center">
+              <v-col cols="12">
+                  <h4>รายละเอียดยาที่พบในระบบ</h4>
+              </v-col>
+            </v-row>
 
             <v-row justify="center">
               <v-col cols="12">

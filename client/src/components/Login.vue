@@ -58,11 +58,16 @@ export default {
       if (this.username === null || this.password === null) {
         alert("Please enter username and password")
       } else {
-          if(this.username !== "test" || this.password !== "1234") {
-              alert("Invalid username or password, try again")
-          } else {
-              alert("Login completed")
+          if(this.username == "p001" && this.password == "1234") {
+              alert("ยินดีต้อนรับเภสัชกร")
               this.$router.push("/home")
+          } else if (this.username == "h001" && this.password == "1234"){
+              alert("ยินดีต้อนรับฝ่ายบุคคล")
+              this.$router.push("/home_hr")
+          }else  {
+              alert("ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง")
+              this.username = null;
+              this.password = null;
           }
       }
     }

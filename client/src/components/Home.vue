@@ -5,6 +5,9 @@
   <div>
 
     <v-container class="grey lighten-5" style="margin-top: 200px">
+       <h1 style="text-align: center">ยินดีต้อนรับสู่ระบบห้องยา</h1>
+       <br />
+            <br />
       <v-row no-gutters>
         <template v-for="n in systems">
           <v-col :key="n">
@@ -51,12 +54,6 @@ export default {
           link: "/RecordBill"
         },
         {
-          name: "Tanapol Tasanthea",
-          id: "B5903917",
-          system: "ระบบบันทึกข้อมูลเภสัชกร",
-          link: "/pharmacist"
-        },
-        {
           name: "Sarocha Suksabai",
           id: "B5905713",
           system: "ระบบบันทึกข้อมูลการสั่งยา",
@@ -80,6 +77,7 @@ export default {
           system: "ระบบเรียกดูข้อมูลยา",
           link: "/viewdrug"
         }
+
       ]
     }
   },
