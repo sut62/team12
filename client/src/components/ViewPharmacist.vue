@@ -42,10 +42,24 @@
              <v-col cols="12">
                   <v-text-field block  prepend-icon="sort" label="รหัสบัตรประจำตัวประชาชน" v-model="pharmacist.id_card"></v-text-field>
               </v-col>
-
+           
+               <v-col cols="12" >
+                  <v-text-field block  prepend-icon="sort" label="คำนำหน้าชื่อ" v-model="pharmacist.titlepharmacist"></v-text-field>
+              </v-col>
+          
+          
               <v-col cols="12">
                   <v-text-field block prepend-icon="text_format" label="ชื่อ-สกุล" v-model="pharmacist.name"></v-text-field>
               </v-col>
+     
+            
+
+            <v-row justify="center">
+              <v-col cols="12">
+                  <v-text-field block prepend-icon="view_module" label="เพศ" v-model="pharmacist.sex"></v-text-field>
+              </v-col>
+            </v-row>
+
 
             <v-row justify="center">
               <v-col cols="12">
@@ -62,6 +76,12 @@
            <v-row justify="center">
               <v-col cols="12">
                 <v-text-field block prepend-icon="local_offer" label="ที่อยู่" v-model="pharmacist.address"></v-text-field>
+              </v-col>
+            </v-row> 
+
+            <v-row justify="center">
+              <v-col cols="12">
+                <v-text-field block prepend-icon="error_outline" label="จังหวัด" v-model="pharmacist.province"></v-text-field>
               </v-col>
             </v-row> 
 
@@ -102,6 +122,9 @@ export default {
   data() {
     return {
       pharmacist: {
+        titlepharmacist: "",
+        sex: "",
+        province: "",
       name: "",
       age: "",
       phone: "",
@@ -114,7 +137,6 @@ export default {
       PharmacistFound: false,
       PharmacistCheck: false,
      
-      
     };
   },
   methods: {
@@ -128,15 +150,19 @@ export default {
                     console.log(response);
                     if (response.data != null) {
                         this.pharmacist.id_card = response.data.id_card;
+                        this.pharmacist.titlepharmacist = response.data.titlePharmacist.titlepharmacist;
                         this.pharmacist.name = response.data.name;
+                        this.pharmacist.sex = response.data.sex.sex;
                         this.pharmacist.birthday = response.data.birthday;
                         this.pharmacist.age = response.data.age;
                         this.pharmacist.address = response.data.address;
+                        this.pharmacist.province = response.data.province.province;
                         this.pharmacist.phone = response.data.phone;
                         this.pharmacist.mail = response.data.mail;
                         this.PharmacistCheck = response.status;
                         this.PharmacistFound = false;
                         
+
                         console.log(this.pharmacist.id_card);
                         console.log(this.pharmacist.titlePharmacist);
                         console.log(this.pharmacist.name);
@@ -160,12 +186,14 @@ export default {
             this.submitted = true;
   
   },
+    
   clear() {
       this.$refs.form.reset();
       this.PharmacistCheck = false;
       this.pharmacistFound = false;
     },
-   
+
+    
 
   },
 
