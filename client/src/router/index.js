@@ -8,6 +8,8 @@ import DrugDispense from '../components/DrugDispense';
 import Pharmacist from '../components/Pharmacist';
 import ViewDrug from '../components/ViewDrug';
 import ViewPharmacist from '../components/ViewPharmacist';
+import Login from '../components/Login';
+import Home from '../components/Home';
 Vue.use(Router);
 
 
@@ -15,6 +17,18 @@ export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
+        {
+            path: '/',
+            component: Login
+        },
+        {
+            path: '/login',
+            component: Login
+        },
+        {
+            path: '/home',
+            component: Home
+        },
         {
             path: '/drugdispense',
             component: DrugDispense
