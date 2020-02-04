@@ -9,16 +9,18 @@
         <span class="font-weight-light"> SYSTEM</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+
+      
       <v-btn @click="gohome" text href="#" target="_blank">
         <v-icon left>home</v-icon> 
         <span>หน้าแรก</span>
-        
       </v-btn>
+
+
     </v-app-bar>
  
 
     <v-content>
-      <!-- <Appointments/> -->
       <router-view />
     </v-content>
   </v-app>
@@ -37,7 +39,7 @@ export default {
   },
   methods: {
     gohome(){
-      this.$router.push('/');
+      this.$router.push('/home');
     }
   }
 }
