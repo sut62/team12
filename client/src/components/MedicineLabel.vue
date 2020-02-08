@@ -122,6 +122,7 @@
                         <v-sheet class="text-center" height="2000px">
                                 <div v-if="saveUSC">
                                     <v-alert 
+                                        dismissible
                                         outlined dense 
                                         text type="warning" 
                                         prominent border="left">
@@ -131,10 +132,21 @@
                                 </div>
                                 <div v-if="saveSC">
                                     <v-alert 
+                                        
+                                        dismissible
                                         dense outlined 
                                         text prominent type="success">บันทึกข้อมูลสำเร็จ
                                     </v-alert>
                                 </div>
+                                <div v-if="printtrue">
+                                    <v-alert 
+                                        
+                                        dismissible
+                                        dense outlined 
+                                        text prominent type="success">พิมพ์สำเสร็จ
+                                    </v-alert>
+                                </div>
+                    
                                 <div id="printMe"><!--ปรินมี-->
                                     <v-container>
                                         <v-row justify="center">
@@ -175,7 +187,7 @@
                                                 <v-row>
                                                     <v-col>
                                                         <p class="text-left">
-                                                            เวลา:{{medicine.m_duration}}
+                                                            ช่วงเวลา:{{medicine.m_duration}}
                                                         </p>
                                                     </v-col>
                                                 </v-row>
@@ -191,9 +203,11 @@
                                         </v-col>
                                     </v-row>
 
+                                    <div v-if="saveSC">
                                     <v-row justify="center">
-                                        <v-btn color="primary" dark  @click="print">พิมพ์</v-btn>
+                                        <v-btn color="primary" dark  @click="printMedicine ">พิมพ์</v-btn>
                                     </v-row>
+                                    </div>
                                 </v-container>
                             </div>
                         </v-sheet>
@@ -230,6 +244,8 @@ export default {
 
                 //คลาสที่เอามาเก็บตัวแปร
             },
+            
+            printtrue: false,
             valid: false,
             sheet: false,
             orderCheck: false,
@@ -260,8 +276,10 @@ export default {
         },
         printMedicine() {
             if(this.saveSC == true) {
-            this.print();
+                this.printtrue = true;
+                this.print();
             }
+        
         },
 
         findFrequency() {
