@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -31,6 +31,7 @@ public class DrugDispense {
     @Column(name = "DRUGDISPENSE_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
+    @Size(min=2,max=30)
     private @NotNull String reciever_name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugDispenseChannel.class)
