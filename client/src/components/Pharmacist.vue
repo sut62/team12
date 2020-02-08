@@ -51,23 +51,6 @@
             ></v-select>
           </v-col>
 
-          <v-col col="12" md="5">
-            <v-menu v-model="menu1" :close-on-content-click="false" full-width max-width="290">
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="computedDateFormattedMomentjs"
-                  clearable
-                  label="วันเกิด"
-                  readonly
-                  v-on="on"
-                  locale="th"
-                ></v-text-field>
-              </template>
-
-              <v-date-picker locale="th" v-model="birthday" @change="menu1 = false"></v-date-picker>
-            </v-menu>
-          </v-col>
-
           <v-col cols="12" md="2">
             <v-text-field label="อายุ" suffix="ปี" v-model="pharmacist.age"
               :rules="[(v) => !!v || 'Item is required']"
@@ -121,16 +104,8 @@
 
 <script>
 import http from "../http-common";
-import moment from "moment";
 
 export default {
-  computed: {
-    computedDateFormattedMomentjs() {
-      return this.birthday
-        ? moment(this.birthday).format("dddd Do, MMMM YYYY")
-        : "";
-    }
-  },
   name: "pharmacist",
   data() {
     return {
@@ -148,10 +123,6 @@ export default {
       valid: false,
       saveSC: false,
       saveUSC: false,
-
-      menu: false,
-      birthday: "",
-      menu1: false,
 
       titlepharmacist: [],
       sex: [],
@@ -229,8 +200,6 @@ export default {
             this.pharmacist.name +
             "/" +
             this.pharmacist.sexId +
-            "/" +
-            this.birthday +
             "/" +
             this.pharmacist.age +
             "/" +
