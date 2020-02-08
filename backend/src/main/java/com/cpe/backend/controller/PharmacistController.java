@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -61,14 +60,13 @@ public class PharmacistController {
             return pharmacist;
     }
 
-    @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{birthday}/{age}/{province_id}/{address}/{phone}/{mail}")
+    @PostMapping("/pharmacist/{id_card}/{titlepharmacist_id}/{name}/{sex_id}/{age}/{province_id}/{address}/{phone}/{mail}")
     public Pharmacist newPharmacist(Pharmacist newPharmacist,
     @PathVariable String id_card,
     @PathVariable long province_id,
     @PathVariable long sex_id,
     @PathVariable long titlepharmacist_id,
     @PathVariable String name,
-    @PathVariable Date birthday,
     @PathVariable Integer age,
     @PathVariable String address,
     @PathVariable String phone,
@@ -83,7 +81,6 @@ public class PharmacistController {
     newPharmacist.setTitlePharmacist(titlepharmacist);
     newPharmacist.setId_card(id_card);
     newPharmacist.setName(name);
-    newPharmacist.setBirthday(birthday);
     newPharmacist.setAge(age);  
     newPharmacist.setAddress(address); 
     newPharmacist.setPhone(phone);  

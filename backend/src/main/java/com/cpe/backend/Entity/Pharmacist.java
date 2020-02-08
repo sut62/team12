@@ -19,8 +19,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import java.sql.Date;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -55,10 +53,6 @@ public class Pharmacist {
     @NotNull
     @Size( max = 50,min = 5)
     private @NonNull String name;
-
-    @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
-    private @NonNull Date birthday;
 
     @NotNull
     @Min(1)

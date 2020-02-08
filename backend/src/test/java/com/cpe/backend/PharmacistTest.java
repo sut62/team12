@@ -25,10 +25,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 
-import java.sql.Date;
-import java.util.Optional;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -60,7 +56,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(19);
-    java.sql.Date birthday = new java.sql.Date(1997-10-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -68,7 +63,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -79,7 +73,6 @@ public class PharmacistTest {
         assertEquals("1234567890123", check.get().getId_card());
         assertEquals("ขขขขขข", check.get().getName());
         assertEquals(33, check.get().getAge());
-        assertEquals(birthday, check.get().getBirthday());
         assertEquals("17037b@ffsf", check.get().getMail());
         assertEquals("Address", check.get().getAddress());
         assertEquals("0812345678", check.get().getPhone());
@@ -97,7 +90,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("123456789012");
@@ -105,7 +97,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -130,7 +121,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("12345678901234");
@@ -138,7 +128,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -164,7 +153,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card(null);
@@ -172,7 +160,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -199,7 +186,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card("1234567890123");
@@ -207,7 +193,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName(null);
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -234,7 +219,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -242,7 +226,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("k");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -268,7 +251,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -276,7 +258,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("สุดสวยแสนดีสุดสวยแสนดีสุดสวยแสนดีสุดสวยแสนดีสุดสวยแสนดีมาก");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -302,7 +283,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -310,7 +290,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("k");
-    pharm.setBirthday(birthday);
     pharm.setAge(0);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -336,7 +315,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -344,7 +322,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("k");
-    pharm.setBirthday(birthday);
     pharm.setAge(126);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -369,7 +346,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card("1234567890123");
@@ -377,7 +353,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("สายรุ้ง");
-    pharm.setBirthday(birthday);
     pharm.setAge(null);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -404,7 +379,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card("1234567890123");
@@ -412,7 +386,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("สายรุ้ง");
-    pharm.setBirthday(birthday);
     pharm.setAge(20);  
     pharm.setAddress(null); 
     pharm.setPhone("0812345678");  
@@ -439,7 +412,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -447,7 +419,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("k");
-    pharm.setBirthday(birthday);
     pharm.setAge(126);  
     pharm.setAddress("Addresssed1Addresssed2Addresssed3Addresssed4"
     +"Addresssed5Addresssed6Addresssed7Addresssed8Addresssed9Addresssed10"); 
@@ -473,7 +444,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -481,7 +451,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("k");
-    pharm.setBirthday(birthday);
     pharm.setAge(0);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -507,7 +476,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card("1234567890123");
@@ -515,7 +483,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("สายรุ้ง");
-    pharm.setBirthday(birthday);
     pharm.setAge(20);  
     pharm.setAddress("libralya"); 
     pharm.setPhone(null);  
@@ -542,7 +509,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -550,7 +516,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("081234567890");  
@@ -576,7 +541,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -584,7 +548,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("081234");  
@@ -610,7 +573,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -618,7 +580,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -644,7 +605,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try {try{ pharm.setId_card("1234567890123");
@@ -652,7 +612,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("สายรุ้ง");
-    pharm.setBirthday(birthday);
     pharm.setAge(20);  
     pharm.setAddress("libralya"); 
     pharm.setPhone("0812345698");  
@@ -679,7 +638,6 @@ public class PharmacistTest {
     TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
     Sex sex = sexRepository.findById(1);
     Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
 
     Pharmacist pharm = new Pharmacist();
     try { pharm.setId_card("1234567890123");
@@ -687,7 +645,6 @@ public class PharmacistTest {
     pharm.setSex(sex);
     pharm.setTitlePharmacist(titlepharmacist);
     pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
     pharm.setAge(33);  
     pharm.setAddress("Address"); 
     pharm.setPhone("0812345678");  
@@ -702,109 +659,6 @@ public class PharmacistTest {
         ConstraintViolation<Pharmacist> message = result.iterator().next();
         assertEquals("size must be between 5 and 50", message.getMessage());
         assertEquals("Mail", message.getPropertyPath().toString());
-    }
-
-}
-
-@Test
-    void B5903917_testBirthdaywithNotNull() {
-
-    Pharmacist pharmacist = new Pharmacist();
-    TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
-    Sex sex = sexRepository.findById(1);
-    Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-11);
-
-    Pharmacist pharm = new Pharmacist();
-    try {try{ pharm.setId_card("1234567890123");
-    pharm.setProvince(province);
-    pharm.setSex(sex);
-    pharm.setTitlePharmacist(titlepharmacist);
-    pharm.setName("สายรุ้ง");
-    pharm.setBirthday(null);
-    pharm.setAge(20);  
-    pharm.setAddress("libralya"); 
-    pharm.setPhone("0812345698");  
-    pharm.setMail("rrygttg@gfgdsg.bbf");  
-    } catch (NullPointerException e){
-    }}catch (UnexpectedTypeException e){
-     // NullPointerException + UnexpectedTypeException 
-        pharm = pharmacistRepository.saveAndFlush(pharm);
-         Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharm);
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Pharmacist> message = result.iterator().next();
-        assertEquals("Must not be null", message.getMessage());
-        assertEquals("Birthday", message.getPropertyPath().toString());
-    }
-
-}
-
- @Test
-    void B5903917_testBirthdayMustNotBe11Digits() {
-
-    Pharmacist pharmacist = new Pharmacist();
-    TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
-    Sex sex = sexRepository.findById(1);
-    Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(1111-11-111);
-
-    Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card("1234567890123");
-    pharm.setProvince(province);
-    pharm.setSex(sex);
-    pharm.setTitlePharmacist(titlepharmacist);
-    pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
-    pharm.setAge(33);  
-    pharm.setAddress("Addrefss"); 
-    pharm.setPhone("0812345678");  
-    pharm.setMail("ffr2237@fg.661");  
-    } catch (ConstraintViolationException e){
-
-     pharm = pharmacistRepository.saveAndFlush(pharm);
-         Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharm);
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Pharmacist> message = result.iterator().next();
-        assertEquals("must match \"\\d{10}\"", message.getMessage());
-        assertEquals("Birthday", message.getPropertyPath().toString());
-    }
-
-}
-
-@Test
-    void B5903917_testBirthdayMustNotBe9Digits() {
-
-    Pharmacist pharmacist = new Pharmacist();
-    TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(1);
-    Sex sex = sexRepository.findById(1);
-    Province province =  provinceRepository.findById(53);
-    java.sql.Date birthday = new java.sql.Date(111-11-11);
-
-    Pharmacist pharm = new Pharmacist();
-    try { pharm.setId_card("1234567890123");
-    pharm.setProvince(province);
-    pharm.setSex(sex);
-    pharm.setTitlePharmacist(titlepharmacist);
-    pharm.setName("ขขขขขข");
-    pharm.setBirthday(birthday);
-    pharm.setAge(33);  
-    pharm.setAddress("Address"); 
-    pharm.setPhone("0812345678");  
-    pharm.setMail("1bfdb7@.gdgd1");  
-    } catch (ConstraintViolationException e){
-
-     pharm = pharmacistRepository.saveAndFlush(pharm);
-         Set<ConstraintViolation<Pharmacist>> result = validator.validate(pharm);
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Pharmacist> message = result.iterator().next();
-        assertEquals("must match \"\\d{10}\"", message.getMessage());
-        assertEquals("Birthday", message.getPropertyPath().toString());
     }
 
 }
