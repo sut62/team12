@@ -85,6 +85,7 @@
                     <!------------->
                     <v-sheet class="text-center" height="750px">
                         <v-container>
+                            <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
                             <div v-if="saveUSC">
                                 <v-alert outlined dense text type="warning" prominent border="left">
                                     <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
@@ -194,7 +195,11 @@
 <script>
 import http from "../http-common";
 import Vue from 'vue';
-import VueHtmlToPaper from 'vue-html-to-paper'
+import VueHtmlToPaper from 'vue-html-to-paper';
+import VueFlashMessage from 'vue-flash-message';
+
+Vue.use(VueFlashMessage);
+
  
 Vue.use(VueHtmlToPaper);
 
@@ -376,8 +381,10 @@ export default {
 
         printDrugDispense(){
             if(this.saveSC==true){
-                this.print(); 
-            }
+                this.flash('พิมพ์สำเร็จ', 'success');
+                this.print();                                                                   
+            }else
+                this.flash('พิมพ์ไม่สำเร็จ โปรดป้อนข้อมูลให้ครบถ้วนและบันทึก', 'error');                   
                    
         },
 
