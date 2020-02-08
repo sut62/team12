@@ -96,34 +96,7 @@ public class DrugDispenseTest {
                
     }
 
-    @Test
-    void B5915477_testRecieverNameMustBeUnique(){
-        DrugDispense d1 = new DrugDispense();
-        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
-        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
-        Pharmacist pharmacist = pharmacistRepository.findById(2);
-        
-        try{
-            d1.setDrugdispensechannel(drugdispensechannel);
-            d1.setTitlePharmacist(titlepharmacist);
-            d1.setPharmacist(pharmacist);
-            d1.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
-            drugdispenseRepository.saveAndFlush(d1);            
-        }
-        catch(DataIntegrityViolationException e){
-            // คาดหวังว่า DataIntegrityViolationException จะถูก throw
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                DrugDispense d2 = new DrugDispense();
-                
-                d2.setDrugdispensechannel(drugdispensechannel);
-                d2.setTitlePharmacist(titlepharmacist);
-                d2.setPharmacist(pharmacist);
-                d2.setReciever_name("ประวีร์ ยุทธวีระวงศ์");
-                drugdispenseRepository.saveAndFlush(d2);               
-            });
-        }        
-        
-    }
+    
 
     @Test
     void B5915477_testRecieverNameNotLessThan2(){
