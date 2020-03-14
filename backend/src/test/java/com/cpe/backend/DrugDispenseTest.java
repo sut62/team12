@@ -147,7 +147,7 @@ public class DrugDispenseTest {
     }
     
     @Test
-    void B5915477_testDrugDispenseChannelMustNotBeNull() { // ใส่ข้อมูลปกติ
+    void B5915477_testDrugDispenseChannelMustNotBeNull() { 
         DrugDispense drugdispense = new DrugDispense();
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
         Pharmacist pharmacist = pharmacistRepository.findById(2);
@@ -171,7 +171,7 @@ public class DrugDispenseTest {
     }
 
     @Test
-    void B5915477_testTitlePharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
+    void B5915477_testTitlePharmacistMustNotBeNull() { 
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         Pharmacist pharmacist = pharmacistRepository.findById(2);
@@ -195,7 +195,7 @@ public class DrugDispenseTest {
     }
 
     @Test
-    void B5915477_testPharmacistMustNotBeNull() { // ใส่ข้อมูลปกติ
+    void B5915477_testPharmacistMustNotBeNull() {
         DrugDispense drugdispense = new DrugDispense();
         DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
         TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
@@ -215,6 +215,30 @@ public class DrugDispenseTest {
             ConstraintViolation<DrugDispense> v = result.iterator().next();
             assertEquals("must be not null", v.getMessage());
             assertEquals("pharmacist", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+    void B5915477_testRecieverNameMustNotBePattern() {
+        DrugDispense drugdispense = new DrugDispense();
+        DrugDispenseChannel drugdispensechannel = drugDispenseChannelRepository.findById(3);
+        TitlePharmacist titlepharmacist = titlepharmacistRepository.findById(2);
+        Pharmacist pharmacist = pharmacistRepository.findById(2);
+
+        try{
+            drugdispense.setDrugdispensechannel(drugdispensechannel);
+            drugdispense.setTitlePharmacist(titlepharmacist);
+            drugdispense.setPharmacist(pharmacist);
+            drugdispense.setReciever_name("^!$@!%$#!!");
+        }
+        catch(ConstraintViolationException e){
+             Set<ConstraintViolation<DrugDispense>> result = validator.validate(drugdispense);
+            
+            assertEquals(1, result.size());
+            
+            ConstraintViolation<DrugDispense> v = result.iterator().next();
+            assertEquals("must match \"[a-zA-Zก-๙\\s]*\"", v.getMessage());
+            assertEquals("reciever_name", v.getPropertyPath().toString());
         }
     }
 

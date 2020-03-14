@@ -32,6 +32,7 @@ public class DrugDispense {
     private @NotNull Long id;
 
     @Size(min=2,max=30)
+    @Pattern(regexp = "[a-zA-Zก-๙\\s]*")
     private @NotNull String reciever_name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugDispenseChannel.class)
