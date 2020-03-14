@@ -1,5 +1,22 @@
 <template>
     <v-container>
+        <div v-if="saveUSC">
+                                    <v-alert 
+                                        dismissible
+                                        outlined dense 
+                                        text type="warning" 
+                                        prominent border="left">
+                                        ไม่สามารถบันทึกได้ โปรดตรวจสอบข้อมูลอีกครั้ง
+                                    </v-alert>
+                                </div>
+                                <div v-if="saveSC">
+                                    <v-alert 
+                                        
+                                        dismissible
+                                        dense outlined 
+                                        text prominent type="success">บันทึกข้อมูลสำเร็จ
+                                    </v-alert>
+                                </div>
         <div class="text-center">
                 <h1 class="display-2">ระบบกรอกข้อมูลฉลากยา</h1>
         </div><br><br>
@@ -109,41 +126,33 @@
                                 item-value="id" label="โปรดเลือกช่วงเวลา" 
                                 :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']" required>
                             </v-select>
-                    
+                             <v-btn color="primary" 
+                            
+                            @click="saveMedicine">บันทึก</v-btn>
                     <!--ปุ่มชีท-->
                     <v-bottom-sheet v-model="sheet">
                         <template v-slot:activator="{ on }">
                             <v-btn color="primary" 
                             dark v-on="on" 
-                            @click="saveMedicine">บันทึก</v-btn>
+                            >ดูข้อมูล</v-btn>
                         </template>
                     <!--จบปุ่มชีท-->
                     <!--ชีท-->
                         <v-sheet class="text-center" height="2000px">
-                                <div v-if="saveUSC">
-                                    <v-alert 
-                                        dismissible
-                                        outlined dense 
-                                        text type="warning" 
-                                        prominent border="left">
-                                        <strong>ไม่สามารถบันทึกได้</strong> 
-                                        โปรดตรวจสอบข้อมูลอีกครั้ง
-                                    </v-alert>
-                                </div>
-                                <div v-if="saveSC">
-                                    <v-alert 
-                                        
-                                        dismissible
-                                        dense outlined 
-                                        text prominent type="success">บันทึกข้อมูลสำเร็จ
-                                    </v-alert>
-                                </div>
+                                
                                 <div v-if="printtrue">
-                                    <v-alert 
-                                        
+                                    <v-alert
                                         dismissible
                                         dense outlined 
                                         text prominent type="success">พิมพ์สำเสร็จ
+                                    </v-alert>
+                                </div>
+                                <div v-if="prinfalse">
+                                    <v-alert
+                                        dismissible
+                                        outlined dense 
+                                        text type="warning" 
+                                        prominent border="left">พิมพ์ไม่สำเสร็จ
                                     </v-alert>
                                 </div>
                     
@@ -203,11 +212,11 @@
                                         </v-col>
                                     </v-row>
 
-                                    <div v-if="saveSC">
+                                    
                                     <v-row justify="center">
                                         <v-btn color="primary" dark  @click="printMedicine ">พิมพ์</v-btn>
                                     </v-row>
-                                    </div>
+                                    
                                 </v-container>
                             </div>
                         </v-sheet>
@@ -244,7 +253,7 @@ export default {
 
                 //คลาสที่เอามาเก็บตัวแปร
             },
-            
+            prinfalse: false,
             printtrue: false,
             valid: false,
             sheet: false,
@@ -278,7 +287,11 @@ export default {
             if(this.saveSC == true) {
                 this.printtrue = true;
                 this.print();
-            }
+            }else 
+                
+                this.prinfalse = true;
+                
+            
         
         },
 
