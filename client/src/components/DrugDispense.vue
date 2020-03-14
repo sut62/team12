@@ -1,5 +1,15 @@
 <template>
-<v-container>
+<v-container>                             
+    <div v-if="saveUSC">
+        <v-alert outlined dense text type="warning" prominent border="left">
+            <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
+        </v-alert>
+    </div>
+
+    <div v-if="saveSC">
+        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
+        </v-alert>
+    </div>                   
 
      <div v-if="orderNotFound">
         <v-alert dense outlined type="error">
@@ -78,26 +88,15 @@
             
             <div class="text-center">                
                 <v-bottom-sheet v-model="sheet">
-                    <!-- ปุ่ม บันทึก -->
+                    
+                    <!-- ปุ่ม แสดงรายละเอียด -->
                     <template v-slot:activator="{ on }">
-                        <v-btn rounded v-on="on" @click="saveDrugDispenses" dark>บันทึก</v-btn>
+                        <v-btn rounded @click="saveDrugDispenses" dark>บันทึก</v-btn>
+                        <v-btn rounded v-on="on" dark>แสดงรายละเอียด</v-btn>
                     </template>
                     <!------------->
                     <v-sheet class="text-center" height="750px">
-                        <v-container>
-                            <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
-                            <div v-if="saveUSC">
-                                <v-alert outlined dense text type="warning" prominent border="left">
-                                    <strong>ไม่สามารถบันทึกได้</strong> โปรดตรวจสอบข้อมูลอีกครั้ง
-                                </v-alert>
-                            </div>
-
-                            <div v-if="saveSC">
-                                <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ
-                                </v-alert>
-                            </div>
-                        </v-container>
-                        
+                        <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>                        
                         <!-- รายละเอียดใบจ่ายยา -->
                         <div id="printMe">
                             <v-container>
@@ -162,6 +161,7 @@
 
                     </v-sheet>                
                 </v-bottom-sheet>
+                
             </div>
             
             
@@ -184,10 +184,11 @@
             </v-text-field>
             <v-text-field v-model="Unit" label="หน่วยของจำนวนยา" disabled>
             </v-text-field>
+            
         </v-col>
         <!----------->
      
-
+        
     </v-row>
 </v-container>
 </template>
