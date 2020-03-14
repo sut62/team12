@@ -14,11 +14,13 @@
     "format": "^0.2.2",
     "moment": "^2.24.0",
     "vue": "^2.6.10",
+    "vue-flash-message": "^0.7.2",
     "vue-html-to-paper": "^1.1.1",
     "vue-router": "^3.1.2",
     "vue2-datepicker": "^2.12.0",
     "vuejs-logger": "1.5.3",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.0.0",
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",

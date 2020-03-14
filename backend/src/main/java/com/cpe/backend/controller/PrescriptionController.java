@@ -63,10 +63,18 @@ public class PrescriptionController {
     }
     
     @PostMapping("/prescription/{patient_ID}/{TitleName_id}/{name}/{age}/{drugallergy}/{Doctor_id}/{Drug_id}/{amount}/{Unit_of_medicine_id}")
-    public Prescription newPrescription(Prescription newPrescription, @PathVariable String patient_ID,
-            @PathVariable String name, @PathVariable Integer age, @PathVariable String drugallergy,
-            @PathVariable Integer amount, @PathVariable long Drug_id, @PathVariable long TitleName_id,
-            @PathVariable long Doctor_id, @PathVariable long Unit_of_medicine_id) {
+    public Prescription newPrescription(
+            Prescription newPrescription, 
+            @PathVariable String patient_ID,
+            @PathVariable String name, 
+            @PathVariable Integer age, 
+            @PathVariable String drugallergy,
+            @PathVariable Integer amount, 
+            @PathVariable long Drug_id, 
+            @PathVariable long TitleName_id,
+            @PathVariable long Doctor_id, 
+            @PathVariable long Unit_of_medicine_id) 
+              {
 
         TitleName titleName = titleNameRepository.findById(TitleName_id);
         Doctor doctor_name = doctorRepository.findById(Doctor_id);

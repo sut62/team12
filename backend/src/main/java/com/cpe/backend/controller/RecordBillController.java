@@ -55,6 +55,12 @@ public class RecordBillController {
     public Collection<RecordBill> recordBills() {
         return recordBillRepository.findAll().stream().collect(Collectors.toList());
     }
+    
+    @GetMapping("/recordBill/{id}")
+    public Optional<RecordBill> recordBills(@PathVariable Long id) {
+        Optional<RecordBill> recordBill = recordBillRepository.findById(id);
+        return recordBill;
+    }
 
     @PostMapping("/recordBill/{MedicalRight_id}/{PaymentChannel_id}/{Cashier_id}/{DrugPrice}/{prescription_id}")
     public RecordBill newRecordBill(RecordBill newRecordBill, 
