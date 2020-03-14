@@ -2,6 +2,15 @@
 <v-container>
     <v-container>
         <v-row justify="center">
+                    <div v-if="saveUSC">
+                        <v-alert outlined dense text type="warning" prominent border="left">
+                            ไม่สามารถบันทึกได้ กรุณากรอกข้อมูลให้ครบก่อนบันทึกข้อมูล
+                        </v-alert>
+                    </div>
+
+                    <div v-if="saveSC">
+                        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+                    </div>
             <div v-if="searchNotFound">
                 <v-alert dense outlined type="error">
                     <strong>ไม่พบข้อมูล</strong> กรุณากรอกข้อมูลอีกครั้ง
@@ -34,7 +43,7 @@
                 </v-col>
             </v-row>
 
-            <!-- ผูกข้อมูลTotalPrice กับ TextField-->
+            <!-- ผูกข้อมูลDrugPrice กับ TextField-->
             <v-row>
                 <v-col cols="12" md="4">
                     <v-text-field label="รวมราคาสุทธิ" outlined v-model="RecordBill.DrugPrice"></v-text-field>
@@ -68,21 +77,13 @@
             <v-bottom-sheet v-model="sheet">
                 <template v-slot:activator="{ on }">
                     <v-row>
-                        <v-btn class="mr-12" rounded :class="{ red: !valid, green: valid }" @click="saveRecordBills"  v-on="on">SAVE</v-btn>
+                        <v-btn class="mr-12" rounded  v-on="on">แสดงลายละเอียดบิล</v-btn>
+                        <v-btn class="mr-12" rounded :class="{ red: !valid, green: valid }" @click="saveRecordBills">SAVE</v-btn>
                     </v-row>
                 </template>
                 <v-sheet class="text-center" height="750px">
                     <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
-                    <div v-if="saveUSC">
-                        <v-alert outlined dense text type="warning" prominent border="left">
-                            <strong>ไม่สามารถบันทึกได้</strong>
-                            กรุณากรอกข้อมูลให้ครบก่อนบันทึกข้อมูล
-                        </v-alert>
-                    </div>
-
-                    <div v-if="saveSC">
-                        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
-                    </div>
+                    <!-- Print Bill -->
                     <div id="printMe">
                         <v-container>
                             <v-form v-model="valid" ref="form">
