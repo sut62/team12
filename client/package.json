@@ -12,7 +12,7 @@
     "core-js": "^2.6.5",
     "date-fns": "^2.1.0",
     "format": "^0.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "vue": "^2.6.10",
     "vue-flash-message": "^0.7.2",
     "vue-html-to-paper": "^1.1.1",
